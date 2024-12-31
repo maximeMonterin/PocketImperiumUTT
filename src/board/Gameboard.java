@@ -3,7 +3,6 @@ package board;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Gameboard {
 	private List<Sector> sectorList = new ArrayList<Sector>();
 	private static final Gameboard INSTANCE = new Gameboard();

@@ -2,6 +2,8 @@ package utils;
 
 import java.util.HashMap;
 
+//Base de donnée de tous les skins necessaires à la création des secteurs
+
 public class SkinManager {
 	
 	public SkinManager() {}
