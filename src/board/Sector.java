@@ -48,8 +48,7 @@ public class Sector {
 			this.getHexlist().add(tempList);
 		}
 
-		//AMELIORATION => Appeler directement this.skinSectorBuilder() à cet endroit (ig ?), pour supprimer l'appel du main
-		
+		this.skinSectorBuilder();
 		
 	}
 	

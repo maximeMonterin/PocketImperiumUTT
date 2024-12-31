@@ -21,9 +21,6 @@ public class Main {
 		//On passe notre liste en paramètre du constructeur de notre Secteur, qui s'occupera ensuite d'associer les chiffres à de vrais carrés (cf board.Sector.Sector()) 
 		Sector mySectorTest = new Sector(sectorBuilder);
 		
-		//Et on construie la map du skin du secteur
-		mySectorTest.skinSectorBuilder();
-		
 		System.out.println(mySectorTest.getSectorSkin());
 
 	}
