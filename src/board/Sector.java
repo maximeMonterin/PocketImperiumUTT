@@ -41,12 +41,14 @@ public class Sector {
 				Square hexa = new Square();
 				tempList.add(hexa);
 
-				//AMELIORATION => Appeler directement this.addSkinToHex() à cet endroit, pour supprimer l'appel du main
+				this.addSkinToHex(hexa, this.getSectorBuilder()[i][y]);
 			}
 			
 			//Une fois que le parcours d'une liste est terminé, on ajoute notre liste temporaire dans notre liste de liste de carré
 			this.getHexlist().add(tempList);
 		}
+
+		//AMELIORATION => Appeler directement this.skinSectorBuilder() à cet endroit (ig ?), pour supprimer l'appel du main
 		
 		
 	}
@@ -116,44 +118,36 @@ public class Sector {
 	}
 	
 	//Méthode qui permet d'ajouter des skins aux carrés présents dans this.hexlist
-	public void addSkinToHex() {
+	public void addSkinToHex(Square square, int number) {
 		
 		//On instancie un objet SkinManager pour avoir accès à la base de données des skins
 		SkinManager skinManager = new SkinManager();
-		
-		//On parcours notre liste de liste d'integer qui représentent les skins (le fameux système de lego)
-		for(int i = 0; i < this.getSectorBuilder().length; ++i) {
-			for(int j = 0; j < this.getSectorBuilder()[i].length; ++j) {
-				
-				//Pour chaque integer trouvé, on check sa valeur et on associe au carré courant le skin associé au numéro
-				switch(this.getSectorBuilder()[i][j]) {
-					case 1:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinOne());
-						break;
-					case 2:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinTwo());
-						break;
-					case 3:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinThree());
-						break;
-					case 4:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinFour());
-						break;
-					case 5:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinFive());
-						break;
-					case 6:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinSix());
-						break;
-					case 7:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinSeven());
-						break;
-					case 8:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinEight());
-						break;
-				}
-				
-			}
+
+		switch(number) {
+			case 1:
+				square.setSkin(skinManager.getSkinOne());
+				break;
+			case 2:
+				square.setSkin(skinManager.getSkinTwo());
+				break;
+			case 3:
+				square.setSkin(skinManager.getSkinThree());
+				break;
+			case 4:
+				square.setSkin(skinManager.getSkinFour());
+				break;
+			case 5:
+				square.setSkin(skinManager.getSkinFive());
+				break;
+			case 6:
+				square.setSkin(skinManager.getSkinSix());
+				break;
+			case 7:
+				square.setSkin(skinManager.getSkinSeven());
+				break;
+			case 8:
+				square.setSkin(skinManager.getSkinEight());
+				break;
 		}
 	}
 	
