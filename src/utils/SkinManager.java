@@ -53,9 +53,9 @@ public class SkinManager {
 		
 		HashMap<Integer, String> skinFour = new HashMap<Integer, String>();
 		
-		skinFour.put(1, "|");
-		skinFour.put(2, "|");
-		skinFour.put(3, "|");
+		skinFour.put(1, "|    ");
+		skinFour.put(2, "|    ");
+		skinFour.put(3, "|    ");
 		skinFour.put(4, "|____");
 		
 		
@@ -79,9 +79,9 @@ public class SkinManager {
 		
 		HashMap<Integer, String> skinSix = new HashMap<Integer, String>();
 		
-		skinSix.put(1, "|");
-		skinSix.put(2, "|");
-		skinSix.put(3, "|");
+		skinSix.put(1, "|       ");
+		skinSix.put(2, "|       ");
+		skinSix.put(3, "|       ");
 		skinSix.put(4, "|_______");
 		
 		
