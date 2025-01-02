@@ -147,6 +147,12 @@ public class Sector {
 			case 8:
 				square.setSkin(skinManager.getSkinEight());
 				break;
+			case 9:
+				square.setSkin(skinManager.getSkinNine());
+				break;
+			case 10:
+				square.setSkin(skinManager.getSkinTen());
+				break;
 		}
 	}
 	

@@ -2,7 +2,7 @@ package utils;
 
 import java.util.HashMap;
 
-//Base de donnée de tous les skins necessaires à la création des secteurs
+//Base de donnée de tous les skins necessaires à la création des
 
 public class SkinManager {
 	
@@ -112,6 +112,32 @@ public class SkinManager {
 		
 		
 		return skinEight;
+	}
+
+	public HashMap<Integer, String> getSkinNine() {
+		
+		HashMap<Integer, String> skinNine = new HashMap<Integer, String>();
+		
+		skinNine.put(1, "|   ");
+		skinNine.put(2, "|   ");
+		skinNine.put(3, "|   ");
+		skinNine.put(4, "|___");
+		
+		
+		return skinNine;
+	}
+
+	public HashMap<Integer, String> getSkinTen() {
+		
+		HashMap<Integer, String> skinTen = new HashMap<Integer, String>();
+		
+		skinTen.put(1, "   |");
+		skinTen.put(2, "   |");
+		skinTen.put(3, "   |");
+		skinTen.put(4, "___|");
+		
+		
+		return skinTen;
 	}
 
 }
