@@ -57,7 +57,7 @@ public class Sector {
 	
 	
 	//Méthode qui permet de construire la Map du skin du secteur
-	public void skinSectorBuilder() {
+	private void skinSectorBuilder() {
 		
 		//On parcours notre liste de liste de carré
 		for(int i = 0; i < this.getHexlist().size(); ++i) {
@@ -69,7 +69,7 @@ public class Sector {
 	}
 	
 	//Méthode qui permet de construire chaque ligne du skin du secteur
-	public void sectorLineStringBuilder(List<Square> param) {
+	private void sectorLineStringBuilder(List<Square> param) {
 		
 		//Variable permettant de stocker le string de la ligne du secteur en cours
 		String line = "";
@@ -117,7 +117,7 @@ public class Sector {
 	}
 	
 	//Méthode qui permet d'ajouter des skins aux carrés présents dans this.hexlist
-	public void addSkinToHex(Square square, int number) {
+	private void addSkinToHex(Square square, int number) {
 		
 		//On instancie un objet SkinManager pour avoir accès à la base de données des skins
 		SkinManager skinManager = new SkinManager();

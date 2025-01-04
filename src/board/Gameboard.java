@@ -1,13 +1,16 @@
 package board;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Gameboard {
 
 	private List<List<Sector>> sectorList = new ArrayList<List<Sector>>();
+	private int gameboardLineKey = 1;
 	private static List<Sector> tempList = new ArrayList<Sector>();
-	private String skin = "";
+	private HashMap<Integer, String> gameboardSkin = new HashMap<Integer, String>();
 	private static final Gameboard INSTANCE = new Gameboard();
 		
 	private Gameboard() {}
@@ -38,27 +41,64 @@ public class Gameboard {
 	}
 			
 			
-			/* -_-_-_-_-_-_-_- METHODS -_-_-_-_-_-_-_- */
+	/* -_-_-_-_-_-_-_- METHODS -_-_-_-_-_-_-_- */
 		
-			/* 
-			public void skinGameboardBuilder() {
+	//Méthode qui permet de construire la Map du skin du secteur
+	public void gameboardSkinBuilder() {
 		
-				int skinKey = 1;
+		for(int i = 0; i < this.getSectorList().size(); ++i) {
+
+			gameboardLineStringBuilder(this.getSectorList().get(i));
+		} 
+			
+	}
+
+		//Méthode qui permet de construire chaque ligne du skin du secteur
+	private void gameboardLineStringBuilder(List<Sector> param) {
+		
+		String line = "";
+		int skinKey = 1;
+			
+		//On crée une boucle while qui permet de parcourir dans l'entiereté les maps des skins des carrés (ayant des id allant de 1 à 5)
+		while(skinKey <= 13) {
 				
-				//On crée une boucle while qui permet de parcourir dans l'entiereté les maps des skins des carrés (ayant des id allant de 1 à 5)
-				while(skinKey <= 13) {
-		
-					for(int i = 0; i < this.getSectorList().size(); ++i) {
-		
-						this.skin += this.getSectorList().get(i).getSectorSkin().get(skinKey);
-		
-					}
-		
-					++skinKey;
-					this.skin += '\n';
-				}
+			for(int i = 0; i < param.size(); ++i) {
 					
-			}*/
+				if(param.get(i).getSectorSkin().get(skinKey) == null) {
+					line += "";
+				} else {
+					line += param.get(i).getSectorSkin().get(skinKey);
+				}
+			}
+				
+				/*if(skinKey != sizeSkin + 1) {
+					line += '\r';
+				}*/
+
+			if(!line.isEmpty()) {
+				this.gameboardSkin.put(this.gameboardLineKey, line);
+				++this.gameboardLineKey;
+			}
+
+			line = "";
+			++skinKey;
+				
+		}
+	
+	}
+
+	public void displayGameboardSkin(){
+
+		String skin = "";
+
+		for(int i = 1; i < this.gameboardSkin.size(); ++i){
+			skin += this.gameboardSkin.get(i);
+			skin += '\n';
+
+		}
+
+		System.out.println('\n' + skin);
+	}
 			
 			
 	/* -_-_-_-_-_-_-_- GETTERS & SETTERS -_-_-_-_-_-_-_- */
@@ -75,8 +115,8 @@ public class Gameboard {
 		tempList = test;
 	}
 
-	public String getGameboardSkin(){
-		return this.skin;
+	public Map<Integer, String> getGameboardSkin(){
+		return this.gameboardSkin;
 	}
 
 	public String text(){

@@ -72,6 +72,9 @@ public class Main {
 		Gameboard gameboard = Gameboard.getInstance();
 		gameboard.init(temp);
 
+		gameboard.gameboardSkinBuilder();
+		gameboard.displayGameboardSkin();
+
 
 		/* -_-_-_-_-_-_-_- TESTS -_-_-_-_-_-_-_- */
 
