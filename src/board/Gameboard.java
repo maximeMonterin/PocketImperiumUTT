@@ -22,7 +22,7 @@ public class Gameboard {
 	public void init(List<Sector> test){
 		Gameboard.tempList = test;
 
-		int sectorNumber = 9;
+		int sectorNumber = test.size();
 		List<Sector> temp = new ArrayList<Sector>();
 	
 		for(int i = 0; i < sectorNumber; ++i){
@@ -60,7 +60,7 @@ public class Gameboard {
 		int skinKey = 1;
 			
 		//On crée une boucle while qui permet de parcourir dans l'entiereté les maps des skins des carrés (ayant des id allant de 1 à 5)
-		while(skinKey <= 13) {
+		while(skinKey <= 20) {
 				
 			for(int i = 0; i < param.size(); ++i) {
 					
@@ -91,7 +91,7 @@ public class Gameboard {
 
 		String skin = "";
 
-		for(int i = 1; i < this.gameboardSkin.size(); ++i){
+		for(int i = 1; i <= this.gameboardSkin.size(); ++i){
 			skin += this.gameboardSkin.get(i);
 			skin += '\n';
 

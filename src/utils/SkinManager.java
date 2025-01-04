@@ -140,4 +140,17 @@ public class SkinManager {
 		return skinTen;
 	}
 
+	public HashMap<Integer, String> getSkinEleven() {
+		
+		HashMap<Integer, String> skinEleven = new HashMap<Integer, String>();
+		
+		skinEleven.put(1, "       ");
+		skinEleven.put(2, "       ");
+		skinEleven.put(3, "       ");
+		skinEleven.put(4, "       ");
+		
+		
+		return skinEleven;
+	}
+
 }

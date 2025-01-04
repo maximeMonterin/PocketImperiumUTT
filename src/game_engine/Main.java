@@ -12,53 +12,53 @@ public class Main {
 
 		/* -_-_-_-_-_-_-_- INSTANCES -_-_-_-_-_-_-_- */
 
-					 /* PREMIERE RANGEE */
+					 /* PREMIERE LIGNE */
 		
 		//Secteur gauche
 		int[][] sectorBuilderOne = {{1,2},{3,7,4},{8,5}};
-		Sector sectorLeft = new Sector(sectorBuilderOne);
+		Sector sectorOne = new Sector(sectorBuilderOne);
 
 		//Secteur centre
 		int[][] sectorBuilderTwo = {{2,2},{10,7,4},{5,5}};
-		Sector sectorMiddle = new Sector(sectorBuilderTwo);
+		Sector sectorTwo = new Sector(sectorBuilderTwo);
 
 		//Secteur droite
 		int[][] sectorBuilderThree = {{2,2},{10,7,4},{5,5}};
-		Sector sectorRight = new Sector(sectorBuilderThree);
+		Sector sectorThree = new Sector(sectorBuilderThree);
 
-					 /* DEUXIEME RANGEE */
+					 /* DEUXIEME LIGNE */
 
 		//Secteur gauche
-		int[][] sectorBuilderFour = {{1,2},{3,7,4},{8,5}};
+		int[][] sectorBuilderFour = {{3,7,4},{6,6},{3,7,4}};
 		Sector sectorFour = new Sector(sectorBuilderFour);
 		
 		//Secteur centre
-		int[][] sectorBuilderFive = {{2,2},{10,7,4},{5,5}};
+		int[][] sectorBuilderFive = {{10,11,4},{4,11,3},{10,7,4}};
 		Sector sectorFive = new Sector(sectorBuilderFive);
 		
 		//Secteur droite
-		int[][] sectorBuilderSix = {{2,2},{10,7,4},{5,5}};
+		int[][] sectorBuilderSix = {{10,7,4},{5,5},{10,7,4}};
 		Sector sectorSix = new Sector(sectorBuilderSix);
 
-					/* TROISIEME RANGEE */
+					/* TROISIEME LIGNE */
 
 		//Secteur gauche
-		int[][] sectorBuilderSeven = {{1,2},{3,7,4},{8,5}};
+		int[][] sectorBuilderSeven = {{8,5},{3,7,4},{8,5}};
 		Sector sectorSeven = new Sector(sectorBuilderSeven);
 		
 		//Secteur centre
-		int[][] sectorBuilderEight = {{2,2},{10,7,4},{5,5}};
+		int[][] sectorBuilderEight = {{5,5},{10,7,4},{5,5}};
 		Sector sectorEight = new Sector(sectorBuilderEight);
 		
 		//Secteur droite
-		int[][] sectorBuilderNine = {{2,2},{10,7,4},{5,5}};
+		int[][] sectorBuilderNine = {{5,5},{10,7,4},{5,5}};
 		Sector sectorNine = new Sector(sectorBuilderNine);
 
 		//Gameboard
 		List<Sector> temp = new ArrayList<Sector>();
-		temp.add(sectorRight);
-		temp.add(sectorMiddle);
-		temp.add(sectorLeft);
+		temp.add(sectorOne);
+		temp.add(sectorTwo);
+		temp.add(sectorThree);
 
 		temp.add(sectorFour);
 		temp.add(sectorFive);
