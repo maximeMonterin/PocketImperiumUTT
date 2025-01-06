@@ -3,6 +3,7 @@ package board;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import utils.SkinManager;
 
@@ -19,14 +20,21 @@ public class Sector {
 	private int[][] sectorBuilder;
 	//Int qui sert à la construction de sectorSkin, ça sera la clé associé aux lignes présentent dans la map
 	private int sectorLineKey = 1;
+	private int squarePosition = 1;
+	private char position;
 	private LinePosition linePosition;
 	
 	
 	/* -_-_-_-_-_-_-_- CONSTRUCTOR -_-_-_-_-_-_-_- */
 	
 	
-	public Sector(int[][] sectorBuilder) {
+	public Sector(int[][] sectorBuilder, char position) {
+
+		this.position = position;
+
 		this.setSectorBuilder(sectorBuilder);
+
+		int level = new Random().nextInt(2 - 0 + 1) + 0;
 		
 		//On parcours notre liste de liste d'integer 
 		for(int i = 0; i < this.getSectorBuilder().length; ++i) {
@@ -38,10 +46,12 @@ public class Sector {
 			for(int y = 0; y < this.getSectorBuilder()[i].length; ++y) {
 				
 				//Pour chaque integer trouvé, on instancie un carré et on l'ajoute à notre liste temporaire
-				Square hexa = new Square();
+				Square hexa = new Square(level);
+				hexa.getPosition().put(this.squarePosition, this.position);
 				tempList.add(hexa);
 
 				this.addSkinToHex(hexa, this.getSectorBuilder()[i][y]);
+				++this.squarePosition;
 			}
 			
 			//Une fois que le parcours d'une liste est terminé, on ajoute notre liste temporaire dans notre liste de liste de carré
@@ -124,37 +134,43 @@ public class Sector {
 
 		switch(number) {
 			case 1:
-				square.setSkin(skinManager.getSkinOne());
+				square.setSkin(skinManager.getSkinOne(square.getLevel()));
 				break;
 			case 2:
-				square.setSkin(skinManager.getSkinTwo());
+				square.setSkin(skinManager.getSkinTwo(square.getLevel()));
 				break;
 			case 3:
-				square.setSkin(skinManager.getSkinThree());
+				square.setSkin(skinManager.getSkinThree(square.getLevel()));
 				break;
 			case 4:
-				square.setSkin(skinManager.getSkinFour());
+				square.setSkin(skinManager.getSkinFour(square.getLevel()));
 				break;
 			case 5:
-				square.setSkin(skinManager.getSkinFive());
+				square.setSkin(skinManager.getSkinFive(square.getLevel()));
 				break;
 			case 6:
-				square.setSkin(skinManager.getSkinSix());
+				square.setSkin(skinManager.getSkinSix(square.getLevel()));
 				break;
 			case 7:
-				square.setSkin(skinManager.getSkinSeven());
+				square.setSkin(skinManager.getSkinSeven(square.getLevel()));
 				break;
 			case 8:
-				square.setSkin(skinManager.getSkinEight());
+				square.setSkin(skinManager.getSkinEight(square.getLevel()));
 				break;
 			case 9:
-				square.setSkin(skinManager.getSkinNine());
+				square.setSkin(skinManager.getSkinNine(square.getLevel()));
 				break;
 			case 10:
-				square.setSkin(skinManager.getSkinTen());
+				square.setSkin(skinManager.getSkinTen(square.getLevel()));
 				break;
 			case 11:
 				square.setSkin(skinManager.getSkinEleven());
+				break;
+			case 12:
+				square.setSkin(skinManager.getSkinTwelve());
+				break;
+			case 13:
+				square.setSkin(skinManager.getSkinThirteen());
 				break;
 		}
 	}
@@ -197,6 +213,10 @@ public class Sector {
 
 	public void setSectorSkin(HashMap<Integer, String> sectorSkin) {
 		this.sectorSkin = sectorSkin;
+	}
+
+	public char getSectorPosition(){
+		return this.position;
 	}
 	
 	

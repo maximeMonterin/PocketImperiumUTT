@@ -9,8 +9,9 @@ public class Square {
 	private int level;
 	private List<Character> shipsIn = new ArrayList<Character>();
 	private HashMap<Integer, String> skin;
+	private HashMap<Integer, Character> position = new HashMap<>();
 	
-	public Square() {}
+	public Square(int level) {this.level = level;}
 
 	
 	
@@ -57,6 +58,10 @@ public class Square {
 
 	public void setSkin(HashMap<Integer, String> hashMap) {
 		this.skin = hashMap;
+	}
+
+	public HashMap<Integer, Character> getPosition() {
+		return this.position;
 	}
 	
 }

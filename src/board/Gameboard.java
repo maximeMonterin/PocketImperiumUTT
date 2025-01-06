@@ -53,7 +53,7 @@ public class Gameboard {
 			
 	}
 
-		//Méthode qui permet de construire chaque ligne du skin du secteur
+	//Méthode qui permet de construire chaque ligne du skin du gameboard
 	private void gameboardLineStringBuilder(List<Sector> param) {
 		
 		String line = "";
