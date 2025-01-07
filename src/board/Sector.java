@@ -3,7 +3,6 @@ package board;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 import utils.SkinManager;
 
@@ -18,6 +17,7 @@ public class Sector {
 	private HashMap<Integer, String> sectorSkin = new HashMap<Integer, String>();
 	//Le tableau d'integer qui permet d'associer aux carrés un skin en fonction des chiffres stockés
 	private int[][] sectorBuilder;
+	private int[][] levelBuilder;
 	//Int qui sert à la construction de sectorSkin, ça sera la clé associé aux lignes présentent dans la map
 	private int sectorLineKey = 1;
 	private int squarePosition = 1;
@@ -28,13 +28,12 @@ public class Sector {
 	/* -_-_-_-_-_-_-_- CONSTRUCTOR -_-_-_-_-_-_-_- */
 	
 	
-	public Sector(int[][] sectorBuilder, char position) {
+	public Sector(int[][] sectorBuilder, int[][] levelBuilder, char position) {
 
 		this.position = position;
 
 		this.setSectorBuilder(sectorBuilder);
-
-		int level = new Random().nextInt(2 - 0 + 1) + 0;
+		this.setLevelBuilder(levelBuilder);
 		
 		//On parcours notre liste de liste d'integer 
 		for(int i = 0; i < this.getSectorBuilder().length; ++i) {
@@ -44,14 +43,15 @@ public class Sector {
 			
 			//On parcours ensuite chaque liste présente dans notre liste de liste
 			for(int y = 0; y < this.getSectorBuilder()[i].length; ++y) {
-				
+
 				//Pour chaque integer trouvé, on instancie un carré et on l'ajoute à notre liste temporaire
-				Square hexa = new Square(level);
+				Square hexa = new Square(this.getLevelBuilder()[i][y]);
 				hexa.getPosition().put(this.squarePosition, this.position);
 				tempList.add(hexa);
 
 				this.addSkinToHex(hexa, this.getSectorBuilder()[i][y]);
 				++this.squarePosition;
+				
 			}
 			
 			//Une fois que le parcours d'une liste est terminé, on ajoute notre liste temporaire dans notre liste de liste de carré
@@ -167,6 +167,7 @@ public class Sector {
 				square.setSkin(skinManager.getSkinEleven());
 				break;
 			case 12:
+				square.setLevel(3);
 				square.setSkin(skinManager.getSkinTwelve());
 				break;
 			case 13:
@@ -193,6 +194,14 @@ public class Sector {
 
 	public void setSectorBuilder(int[][] sectorBuilder) {
 		this.sectorBuilder = sectorBuilder;
+	}
+
+	public void setLevelBuilder(int[][] levelBuilder) {
+		this.levelBuilder = levelBuilder;
+	}
+
+	public int[][] getLevelBuilder(){
+		return this.levelBuilder;
 	}
 
 
