@@ -3,8 +3,11 @@ package game_engine;
 import java.util.ArrayList;
 import java.util.List;
 
+import Command.Command;
 import board.Gameboard;
 import user.Player;
+import java.util.Collections;
+import java.util.Iterator;
 
 public class Game {
 	
@@ -25,17 +28,24 @@ public class Game {
 	
 	/* -_-_-_-_-_-_-_- METHODS -_-_-_-_-_-_-_- */
 	
-	public void StartGame() {}
+	public void startGame() {
+		Collections.shuffle(this.players);
+		Iterator<Player> iter = this.players.iterator();
+		while(iter.hasNext()){
+			System.out.println("Choisissez un hexagone de niveau 1 inoccupé.");
+			Command.askInteger(0, 999, "mauvais hexagone");
+		}
+	}
 	
-	public void PlayRound() {this.CardReveal();}
+	public void playRound() {this.cardReveal();}
 	
-	public void EndGame() {}
+	public void endGame() {}
 	
-	private void CardReveal() {}
+	private void cardReveal() {}
 	
-	public void SaveIntoJSON() {}
+	public void saveIntoJSON() {}
 	
-	public void LoadJSON() {}
+	public void loadJSON() {}
 	
 	
 	/* -_-_-_-_-_-_-_- GETTERS & SETTERS -_-_-_-_-_-_-_- */

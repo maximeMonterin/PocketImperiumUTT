@@ -27,7 +27,6 @@ public class Sector {
 	
 	public Sector(int[][] sectorBuilder) {
 		this.setSectorBuilder(sectorBuilder);
-		
 		//On parcours notre liste de liste d'integer 
 		for(int i = 0; i < this.getSectorBuilder().length; ++i) {
 			
@@ -35,6 +34,7 @@ public class Sector {
 			List<Square> tempList = new ArrayList<Square>();
 			
 			//On parcours ensuite chaque liste présente dans notre liste de liste
+			
 			for(int y = 0; y < this.getSectorBuilder()[i].length; ++y) {
 				
 				//Pour chaque integer trouvé, on instancie un carré et on l'ajoute à notre liste temporaire
