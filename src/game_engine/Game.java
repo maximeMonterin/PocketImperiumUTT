@@ -31,10 +31,12 @@ public class Game {
 	/* -_-_-_-_-_-_-_- METHODS -_-_-_-_-_-_-_- */
 	
 	public void startGame() {
+
 		this.setUpPlayers();
 	}
 
 	private void setUpPlayers(){
+
 		/*  INSTANCES  */
 		int playerOrder = 1;
 
@@ -46,6 +48,13 @@ public class Game {
 			String name = Command.askPlayerName(playerOrder);
 			Color colorOfPlayer = Command.askColor();
 			Player player = new Player(name, new Faction(colorOfPlayer));
+
+			if(playerOrder == 1){
+				player.setPlayerOne(true);
+			} else {
+				player.setPlayerOne(false);
+			}
+
 			this.getPlayers().add(player);
 
 			++playerOrder;

@@ -23,32 +23,32 @@ public class Command {
              * @param errMessage
              * @return
              */
-            public static int askInteger(int boundInf, int boundSup, String errMessage) {
-                int ans = -2;
-                int i=0;
-                while (ans <= boundInf || ans >= boundSup) {
-                    if (i>0){
-                        System.out.println(errMessage + ". Resaisissez");
-                    }
-                    try {
-                        ans = scanner.nextInt();
-                    } catch (Exception e) {
-                        ans = -2;
-                        scanner.next();
-                    }
-                    i++;
-                }
-                return ans;
+    public static int askInteger(int boundInf, int boundSup, String errMessage) {
+        int ans = -2;
+        int i=0;
+        while (ans <= boundInf || ans >= boundSup) {
+            if (i>0){
+                System.out.println(errMessage + ". Resaisissez");
             }
+            try {
+                ans = scanner.nextInt();
+            } catch (Exception e) {
+                ans = -2;
+                scanner.next();
+            }
+            i++;
+        }
+        return ans;
+    }
         
-            public static String askPlayerName(int player){
+    public static String askPlayerName(int player){
                 
-                System.out.println(Command.instanceString + " Joueur " + player + ", veuillez choisir votre pseudo: ");
-                currentPlayer = player;
-                String ask = scanner.nextLine();
+        System.out.println(Command.instanceString + " Joueur " + player + ", veuillez choisir votre pseudo: ");
+        currentPlayer = player;
+        String ask = scanner.nextLine();
 
-                return ask;
-            }
+        return ask;
+    }
     
     public static Color askColor(){
         Color color;
