@@ -14,7 +14,7 @@ public class Command {
     public static Scanner scanner = new Scanner(System.in);
     public static String instanceString = "\u001B[34m" + "[PocketImperium]" + "\u001B[0m";
     private static int currentPlayer;
-    private static List<String> colors = new ArrayList<>(Arrays.asList("Rouge", "Bleu", "Jaune", "Vert"));
+    private static List<String> colors = new ArrayList<>(Arrays.asList("ROUGE", "BLEU", "JAUNE", "VERT"));
         
             /**
              * Permet de centraliser les interactions avec l'utilisateur et la gestion d'erreur dans une seule méthode.
@@ -51,31 +51,29 @@ public class Command {
             }
     
     public static Color askColor(){
-        System.out.println(colors);
-
         Color color;
         
-        System.out.println(Command.instanceString + " Joueur " + currentPlayer + ", veuillez choisir la couleur qui représentera votre faction : ");
+        System.out.println(Command.instanceString + " Joueur " + currentPlayer + ", veuillez choisir la couleur qui représentera votre faction, parmi " + colors + " : ");
         String ask = scanner.nextLine();
 
-        while(!colors.contains(ask)){
+        while(!colors.contains(ask.toUpperCase())){
             System.out.println(Command.instanceString + " Joueur " + currentPlayer + ", veuillez une couleur valide ET/OU disponible : ");
             ask = scanner.nextLine();
         }
 
-        colors.remove(ask);
+        colors.remove(ask.toUpperCase());
 
-        switch (ask) {
-			case "Rouge":
+        switch (ask.toUpperCase()) {
+			case "ROUGE":
 				color = Color.ROUGE;
 				break;
-			case "Jaune" :
+			case "JAUNE" :
                 color = Color.JAUNE;
 				break;
-			case "Vert" :
+			case "VERT" :
                 color = Color.VERT;
 				break;
-			case "Bleu" :
+			case "BLEU" :
                 color = Color.BLEU;
 			default:
                 color = Color.BLEU;
