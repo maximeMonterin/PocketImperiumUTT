@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import board.Gameboard;
-import game_engine.Game;
 import user.Color;
 import user.Player;
 
