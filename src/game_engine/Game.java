@@ -3,12 +3,13 @@ package game_engine;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import Command.Command;
 import board.Gameboard;
 import board.Sector;
+import user.Color;
+import user.Faction;
 import user.Player;
-import java.util.Collections;
-import java.util.Iterator;
 
 public class Game {
 	
@@ -30,12 +31,33 @@ public class Game {
 	/* -_-_-_-_-_-_-_- METHODS -_-_-_-_-_-_-_- */
 	
 	public void startGame() {
-		Collections.shuffle(this.players);
-		Iterator<Player> iter = this.players.iterator();
-		while(iter.hasNext()){
-			System.out.println("Choisissez un hexagone de niveau 1 inoccupé.");
-			Command.askInteger(0, 999, "mauvais hexagone");
+
+		/*  INSTANCES  */
+		int playerOrder = 1;
+
+		/* CODE */
+
+		System.out.println(Command.instanceString + " Bienvenue dans une partie de Pocket Imperium !");
+
+		while(playerOrder < 4){
+			String name = Command.askPlayerName(playerOrder);
+			Color colorOfPlayer = Command.askColor();
+			Player player = new Player(name, new Faction(colorOfPlayer));
+			this.getPlayers().add(player);
+
+			++playerOrder;
 		}
+
+		Command.scanner.close();
+
+		String playerList = "";
+
+		for(int i = 0; i < players.size(); ++i){
+			playerList += players.get(i).getFaction().getColorCode() + " [" + players.get(i).getName() + "]" + "\u001B[0m";
+		}
+
+		System.out.println(Command.instanceString + " Joueurs" + playerList + ", bienvenue a vous !");
+		System.out.println(Command.instanceString + " Setup de la partie termine, enclanchement de la prochaine phase");
 	}
 	
 	public void playRound() {this.cardReveal();}
@@ -79,7 +101,7 @@ public class Game {
 		//Secteur centre
 		int[][] levelSectorFive = {{0,3,0},{3,3,3},{0,3,0}};
 		int[][] sectorBuilderFive = {{10,11,4},{4,12,3},{10,13,4}};
-		Sector sectorFive = new Sector(sectorBuilderFive, levelSectorFive, 'e');
+		Sector triPrimeSector = new Sector(sectorBuilderFive, levelSectorFive, 'e');
 		
 		//Secteur droite
 		int[][] levelSectorSix = {{0,1,0},{0,2},{0,1,0}};
@@ -110,7 +132,7 @@ public class Game {
 		temp.add(sectorThree);
 
 		temp.add(sectorFour);
-		temp.add(sectorFive);
+		temp.add(triPrimeSector);
 		temp.add(sectorSix);
 
 		temp.add(sectorSeven);

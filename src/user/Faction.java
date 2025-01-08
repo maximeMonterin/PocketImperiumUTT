@@ -10,9 +10,28 @@ public class Faction {
 	private int reserve;
 	private List<Square> hexList = new ArrayList<Square>();
 	private Color color;
+	private String colorCode;
 	private int score;
 	
-	public Faction() {}
+	public Faction(Color color) {
+		this.color = color;
+
+		switch (color) {
+			case ROUGE:
+				this.colorCode = "\u001B[31m";
+				break;
+			case JAUNE :
+				this.colorCode = "\u001B[33m";
+				break;
+			case VERT :
+				this.colorCode = "\u001B[32m";
+				break;
+			case BLEU :
+				this.colorCode = "\u001B[34m";
+			default:
+				break;
+		}
+	}
 
 	
 	
@@ -67,9 +86,9 @@ public class Faction {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
-	
-	
-	
 
+	public String getColorCode(){
+		return this.colorCode;
+	}
+	
 }

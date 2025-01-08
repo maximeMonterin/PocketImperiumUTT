@@ -21,6 +21,7 @@ public class Sector {
 	//Int qui sert à la construction de sectorSkin, ça sera la clé associé aux lignes présentent dans la map
 	private int sectorLineKey = 1;
 	private int squarePosition = 1;
+	private boolean isOccuped = false;
 	private char position;
 	private LinePosition linePosition;
 	
@@ -227,6 +228,14 @@ public class Sector {
 
 	public char getSectorPosition(){
 		return this.position;
+	}
+
+	public boolean getIsOccuped(){
+		return this.isOccuped;
+	}
+
+	public void setIsOccuped(boolean bool){
+		this.isOccuped = bool;
 	}
 	
 	

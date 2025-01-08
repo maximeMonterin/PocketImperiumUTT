@@ -13,12 +13,9 @@ public class Player {
 	private List<Cards> cards = new ArrayList<Cards>();
 	private Faction faction;
 	
-	public Player(String name, boolean isPlayerOne, boolean isIA, List<Cards> cards, Faction faction) {
+	public Player(String name, Faction faction) {
 		super();
 		this.name = name;
-		this.isPlayerOne = isPlayerOne;
-		this.isIA = isIA;
-		this.cards = cards;
 		this.faction = faction;
 	}
 
