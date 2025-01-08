@@ -31,7 +31,10 @@ public class Game {
 	/* -_-_-_-_-_-_-_- METHODS -_-_-_-_-_-_-_- */
 	
 	public void startGame() {
+		this.setUpPlayers();
+	}
 
+	private void setUpPlayers(){
 		/*  INSTANCES  */
 		int playerOrder = 1;
 
