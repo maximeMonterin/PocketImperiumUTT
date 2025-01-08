@@ -17,16 +17,24 @@ public class Sector {
 	private HashMap<Integer, String> sectorSkin = new HashMap<Integer, String>();
 	//Le tableau d'integer qui permet d'associer aux carrés un skin en fonction des chiffres stockés
 	private int[][] sectorBuilder;
+	private int[][] levelBuilder;
 	//Int qui sert à la construction de sectorSkin, ça sera la clé associé aux lignes présentent dans la map
 	private int sectorLineKey = 1;
+	private int squarePosition = 1;
+	private char position;
 	private LinePosition linePosition;
 	
 	
 	/* -_-_-_-_-_-_-_- CONSTRUCTOR -_-_-_-_-_-_-_- */
 	
 	
-	public Sector(int[][] sectorBuilder) {
+	public Sector(int[][] sectorBuilder, int[][] levelBuilder, char position) {
+
+		this.position = position;
+
 		this.setSectorBuilder(sectorBuilder);
+		this.setLevelBuilder(levelBuilder);
+		
 		//On parcours notre liste de liste d'integer 
 		for(int i = 0; i < this.getSectorBuilder().length; ++i) {
 			
@@ -36,18 +44,22 @@ public class Sector {
 			//On parcours ensuite chaque liste présente dans notre liste de liste
 			
 			for(int y = 0; y < this.getSectorBuilder()[i].length; ++y) {
-				
+
 				//Pour chaque integer trouvé, on instancie un carré et on l'ajoute à notre liste temporaire
-				Square hexa = new Square();
+				Square hexa = new Square(this.getLevelBuilder()[i][y]);
+				hexa.getPosition().put(this.squarePosition, this.position);
 				tempList.add(hexa);
 
-				//AMELIORATION => Appeler directement this.addSkinToHex() à cet endroit, pour supprimer l'appel du main
+				this.addSkinToHex(hexa, this.getSectorBuilder()[i][y]);
+				++this.squarePosition;
+				
 			}
 			
 			//Une fois que le parcours d'une liste est terminé, on ajoute notre liste temporaire dans notre liste de liste de carré
 			this.getHexlist().add(tempList);
 		}
-		
+
+		this.skinSectorBuilder();
 		
 	}
 	
@@ -56,7 +68,7 @@ public class Sector {
 	
 	
 	//Méthode qui permet de construire la Map du skin du secteur
-	public void skinSectorBuilder() {
+	private void skinSectorBuilder() {
 		
 		//On parcours notre liste de liste de carré
 		for(int i = 0; i < this.getHexlist().size(); ++i) {
@@ -68,7 +80,7 @@ public class Sector {
 	}
 	
 	//Méthode qui permet de construire chaque ligne du skin du secteur
-	public void sectorLineStringBuilder(List<Square> param) {
+	private void sectorLineStringBuilder(List<Square> param) {
 		
 		//Variable permettant de stocker le string de la ligne du secteur en cours
 		String line = "";
@@ -116,44 +128,52 @@ public class Sector {
 	}
 	
 	//Méthode qui permet d'ajouter des skins aux carrés présents dans this.hexlist
-	public void addSkinToHex() {
+	private void addSkinToHex(Square square, int number) {
 		
 		//On instancie un objet SkinManager pour avoir accès à la base de données des skins
 		SkinManager skinManager = new SkinManager();
-		
-		//On parcours notre liste de liste d'integer qui représentent les skins (le fameux système de lego)
-		for(int i = 0; i < this.getSectorBuilder().length; ++i) {
-			for(int j = 0; j < this.getSectorBuilder()[i].length; ++j) {
-				
-				//Pour chaque integer trouvé, on check sa valeur et on associe au carré courant le skin associé au numéro
-				switch(this.getSectorBuilder()[i][j]) {
-					case 1:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinOne());
-						break;
-					case 2:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinTwo());
-						break;
-					case 3:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinThree());
-						break;
-					case 4:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinFour());
-						break;
-					case 5:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinFive());
-						break;
-					case 6:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinSix());
-						break;
-					case 7:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinSeven());
-						break;
-					case 8:
-						this.getHexlist().get(i).get(j).setSkin(skinManager.getSkinEight());
-						break;
-				}
-				
-			}
+
+		switch(number) {
+			case 1:
+				square.setSkin(skinManager.getSkinOne(square.getLevel()));
+				break;
+			case 2:
+				square.setSkin(skinManager.getSkinTwo(square.getLevel()));
+				break;
+			case 3:
+				square.setSkin(skinManager.getSkinThree(square.getLevel()));
+				break;
+			case 4:
+				square.setSkin(skinManager.getSkinFour(square.getLevel()));
+				break;
+			case 5:
+				square.setSkin(skinManager.getSkinFive(square.getLevel()));
+				break;
+			case 6:
+				square.setSkin(skinManager.getSkinSix(square.getLevel()));
+				break;
+			case 7:
+				square.setSkin(skinManager.getSkinSeven(square.getLevel()));
+				break;
+			case 8:
+				square.setSkin(skinManager.getSkinEight(square.getLevel()));
+				break;
+			case 9:
+				square.setSkin(skinManager.getSkinNine(square.getLevel()));
+				break;
+			case 10:
+				square.setSkin(skinManager.getSkinTen(square.getLevel()));
+				break;
+			case 11:
+				square.setSkin(skinManager.getSkinEleven());
+				break;
+			case 12:
+				square.setLevel(3);
+				square.setSkin(skinManager.getSkinTwelve());
+				break;
+			case 13:
+				square.setSkin(skinManager.getSkinThirteen());
+				break;
 		}
 	}
 	
@@ -177,6 +197,14 @@ public class Sector {
 		this.sectorBuilder = sectorBuilder;
 	}
 
+	public void setLevelBuilder(int[][] levelBuilder) {
+		this.levelBuilder = levelBuilder;
+	}
+
+	public int[][] getLevelBuilder(){
+		return this.levelBuilder;
+	}
+
 
 	public List<List<Square>> getHexlist() {
 		return hexlist;
@@ -195,6 +223,10 @@ public class Sector {
 
 	public void setSectorSkin(HashMap<Integer, String> sectorSkin) {
 		this.sectorSkin = sectorSkin;
+	}
+
+	public char getSectorPosition(){
+		return this.position;
 	}
 	
 	
