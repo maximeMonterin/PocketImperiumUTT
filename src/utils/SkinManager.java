@@ -5,17 +5,34 @@ import java.util.HashMap;
 //Base de donnée de tous les skins necessaires à la création des
 
 public class SkinManager {
+
+	private final String RESET = "\u001B[0m";
 	
 	public SkinManager() {}
+
+	private String getColorByLevel(int level){
+
+		String color = "";
+		if(level == 2){
+			color = "\u001B[35m";
+		}
+		if(level == 1){
+			color = "\u001B[33m";
+		}
+
+		return color;
+
+	}
 	
 	public HashMap<Integer, String> getSkinOne(int level) {
 		
+		String color = this.getColorByLevel(level);
 		HashMap<Integer, String> skinOne = new HashMap<Integer, String>();
 		
 		if(level != 0){
 			skinOne.put(1, "_________");
 			skinOne.put(2, "|       |");
-			skinOne.put(3, "|   " + level + "   |");
+			skinOne.put(3, "|   " + color + level + this.RESET + "   |");
 			skinOne.put(4, "|       |");
 			skinOne.put(5, "|_______|");
 		} 
@@ -33,12 +50,13 @@ public class SkinManager {
 	
 	public HashMap<Integer, String> getSkinTwo(int level) {
 		
+		String color = this.getColorByLevel(level);
 		HashMap<Integer, String> skinTwo = new HashMap<Integer, String>();
 		
 		if(level != 0){
 			skinTwo.put(1, "________");
 			skinTwo.put(2, "       |");
-			skinTwo.put(3, "   " + level + "   |");
+			skinTwo.put(3, "   " + color + level + this.RESET + "   |");
 			skinTwo.put(4, "       |");
 			skinTwo.put(5, "_______|");
 		}
@@ -82,11 +100,12 @@ public class SkinManager {
 	
 	public HashMap<Integer, String> getSkinFive(int level) {
 		
+		String color = this.getColorByLevel(level);
 		HashMap<Integer, String> skinFive = new HashMap<Integer, String>();
 		
 		if(level != 0){
 			skinFive.put(1, "       |");
-			skinFive.put(2, "   " + level + "   |");
+			skinFive.put(2, "   " + color + level + this.RESET + "   |");
 			skinFive.put(3, "       |");
 			skinFive.put(4, "_______|");
 		}
@@ -103,11 +122,12 @@ public class SkinManager {
 	
 	public HashMap<Integer, String> getSkinSix(int level) {
 		
+		String color = this.getColorByLevel(level);
 		HashMap<Integer, String> skinSix = new HashMap<Integer, String>();
 		
 		if(level != 0){
 			skinSix.put(1, "|       ");
-			skinSix.put(2, "|   " + level + "   ");
+			skinSix.put(2, "|   " + color + level + this.RESET + "   ");
 			skinSix.put(3, "|       ");
 			skinSix.put(4, "|_______");			
 		}
@@ -123,11 +143,12 @@ public class SkinManager {
 	
 	public HashMap<Integer, String> getSkinSeven(int level) {
 		
+		String color = this.getColorByLevel(level);
 		HashMap<Integer, String> skinSeven = new HashMap<Integer, String>();
 
 		if(level != 0){
 			skinSeven.put(1, "       ");
-			skinSeven.put(2, "   " + level + "   ");
+			skinSeven.put(2, "   " + color + level + this.RESET + "   ");
 			skinSeven.put(3, "       ");
 			skinSeven.put(4, "_______");			
 		}
@@ -143,11 +164,12 @@ public class SkinManager {
 	
 	public HashMap<Integer, String> getSkinEight(int level) {
 		
+		String color = this.getColorByLevel(level);
 		HashMap<Integer, String> skinEight = new HashMap<Integer, String>();
 		
 		if(level != 0){
 			skinEight.put(1, "|       |");
-			skinEight.put(2, "|   " + level + "   |");
+			skinEight.put(2, "|   " + color + level + this.RESET + "   |");
 			skinEight.put(3, "|       |");
 			skinEight.put(4, "|_______|");
 		}
@@ -205,10 +227,11 @@ public class SkinManager {
 
 	public HashMap<Integer, String> getSkinTwelve() {
 		
+		String color = "\u001B[32m";
 		HashMap<Integer, String> skinTwelve = new HashMap<Integer, String>();
 		
 		skinTwelve.put(1, "       ");
-		skinTwelve.put(2, "   3   ");
+		skinTwelve.put(2, "   " + color + 3 + this.RESET + "   ");
 		skinTwelve.put(3, "       ");
 		skinTwelve.put(4, "       ");
 		

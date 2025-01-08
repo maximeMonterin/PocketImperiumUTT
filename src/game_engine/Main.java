@@ -12,6 +12,15 @@ public class Main {
 
 		/* -_-_-_-_-_-_-_- INSTANCES -_-_-_-_-_-_-_- */
 
+		gameboardInitialize();
+		
+	}
+		
+
+	private static void gameboardInitialize(){
+				
+		/* -_-_-_-_-_-_-_- INSTANCES -_-_-_-_-_-_-_- */
+
 					 /* PREMIERE LIGNE */
 		
 		//Secteur gauche
@@ -83,13 +92,6 @@ public class Main {
 
 		gameboard.gameboardSkinBuilder();
 		gameboard.displayGameboardSkin();
-
-
-		/* -_-_-_-_-_-_-_- TESTS -_-_-_-_-_-_-_- */
-
-		//gameboard.skinGameboardBuilder();
-		//System.out.println('\r' + gameboard.getGameboardSkin());
-
 	}
 		
 }
