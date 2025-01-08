@@ -5,7 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import board.Gameboard;
+import game_engine.Game;
 import user.Color;
+import user.Player;
 
 public class Command {
     /**
@@ -83,6 +86,36 @@ public class Command {
 
         return color;
 
+    }
+
+    public static void setPlayerShips(Player player, Gameboard gameboard){
+        System.out.println(Command.instanceString + player.getFaction().getColorCode() + " [" + player.getName() + "]" + "\u001B[0m" + ", veuillez choisir un carre que vous souhaitez controler : ");
+        String ask = scanner.nextLine();
+        String position = "";
+
+        for(int i = 0; i < gameboard.getSectorList().size(); ++i){
+            for(int y = 0; y < gameboard.getSectorList().get(i).size(); ++y){
+                for(int x = 0; x < gameboard.getSectorList().get(i).get(y).getHexlist().size(); ++x){
+                    for(int z = 0; z < gameboard.getSectorList().get(i).get(y).getHexlist().get(x).size(); ++z){
+
+                        int line = z + 1;
+                        
+                        position += line + gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getPosition().get(z);
+
+                        while(position != ask && gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getLevel() != 1){
+                            System.out.println(Command.instanceString + player.getFaction().getColorCode() + " [" + player.getName() + "]" + "\u001B[0m" + ", veuillez choisir un carre valide aux criteres demandes : ");
+                            ask = scanner.nextLine();
+                        }
+
+                        String master = gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getSkin().get(3);
+                        String target = "      ";
+                        String replacement = "  ..  ";
+                        String proceed = master.replace(target, replacement);
+                        gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getSkin().replace(3, proceed);
+                    }
+                }
+            }
+        }
     }
 
 }

@@ -44,6 +44,12 @@ public class Game {
 				
 			}
 		}
+
+		for(int i = 0; i < this.players.size(); ++i){
+			Command.setPlayerShips(players.get(i), this.getGameboard());
+		}
+
+		Command.scanner.close();
 		
 
 	}
@@ -72,8 +78,6 @@ public class Game {
 
 			++playerOrder;
 		}
-
-		Command.scanner.close();
 
 		String playerList = "";
 
