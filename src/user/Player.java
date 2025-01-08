@@ -19,6 +19,10 @@ public class Player {
 		this.faction = faction;
 	}
 
+	@Override
+	public String toString() {
+		return "Player [name=" + name + ", factionColor=" + faction.getColor() + "]";
+	}
 	
 	
 	

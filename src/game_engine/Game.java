@@ -33,6 +33,19 @@ public class Game {
 	public void startGame() {
 
 		this.setUpPlayers();
+
+		for(int i = 0; i < this.players.size(); ++i){
+
+			if(players.get(i).isPlayerOne() && i != 0){
+
+				Player tempPlayer = players.get(0);
+				players.set(0, players.get(i));
+				players.set(i, tempPlayer);
+				
+			}
+		}
+		
+
 	}
 
 	private void setUpPlayers(){
@@ -49,7 +62,7 @@ public class Game {
 			Color colorOfPlayer = Command.askColor();
 			Player player = new Player(name, new Faction(colorOfPlayer));
 
-			if(playerOrder == 1){
+			if(playerOrder == 3){
 				player.setPlayerOne(true);
 			} else {
 				player.setPlayerOne(false);
