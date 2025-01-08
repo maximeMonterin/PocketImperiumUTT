@@ -169,7 +169,7 @@ public class Game {
 		temp.add(sectorNine);
 
 
-		Gameboard gameboard = Gameboard.getInstance();
+		this.gameboard = Gameboard.getInstance();
 		gameboard.init(temp);
 
 		gameboard.gameboardSkinBuilder();

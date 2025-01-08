@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import board.Gameboard;
+import board.Square;
 import user.Color;
 import user.Player;
 
@@ -92,29 +93,57 @@ public class Command {
         String ask = scanner.nextLine();
         String position = "";
 
+        List<String> allLevelOneSquarePos = new ArrayList<>();
+        List<Square> allLevelOneSquare = new ArrayList<>();
+
+
+        //Liste de secteurs
         for(int i = 0; i < gameboard.getSectorList().size(); ++i){
+            //Liste de liste de secteur
             for(int y = 0; y < gameboard.getSectorList().get(i).size(); ++y){
+                //Liste des carrés
                 for(int x = 0; x < gameboard.getSectorList().get(i).get(y).getHexlist().size(); ++x){
+                    //Liste de liste de carré
                     for(int z = 0; z < gameboard.getSectorList().get(i).get(y).getHexlist().get(x).size(); ++z){
 
-                        int line = z + 1;
-                        
-                        position += line + gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getPosition().get(z);
+                        if(gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getLevel() == 1){
+                            allLevelOneSquare.add(gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z));
 
-                        while(position != ask && gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getLevel() != 1){
-                            System.out.println(Command.instanceString + player.getFaction().getColorCode() + " [" + player.getName() + "]" + "\u001B[0m" + ", veuillez choisir un carre valide aux criteres demandes : ");
-                            ask = scanner.nextLine();
+                            int line = z + 1;
+                            position += String.valueOf(line) + gameboard.getSectorList().get(i).get(y).getSectorPosition();
+                            position = String.valueOf(position);
+
+                            allLevelOneSquarePos.add(position);
+
+                            position = "";
+
                         }
 
-                        String master = gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getSkin().get(3);
-                        String target = "      ";
-                        String replacement = "  ..  ";
-                        String proceed = master.replace(target, replacement);
-                        gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getSkin().replace(3, proceed);
+                            /*
+                            System.out.println(position);
+                            System.out.println(gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getLevel());
+
+                            if(position == ask && gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getLevel() == 1){
+                                String master = gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getSkin().get(3);
+                                String target = "      ";
+                                String replacement = "  " + player.getFaction().getColorCode() + ".." + "\u001B[0m" + "  ";
+                                String proceed = master.replace(target, replacement);
+                                gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getSkin().replace(3, proceed);
+                                gameboard.displayGameboardSkin();
+                                squareUnlock = true;
+                            } else {
+                                System.out.println("veuillez entrer une autre valeur de carre : ");
+                                position = "";
+                                ask = scanner.nextLine();
+                            } */
+                        }
                     }
                 }
             }
+
+            System.out.println(ask);
+            System.out.println(allLevelOneSquare);
+            System.out.println(allLevelOneSquarePos);
         }
-    }
 
 }
