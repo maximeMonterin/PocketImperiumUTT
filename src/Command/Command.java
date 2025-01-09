@@ -99,6 +99,7 @@ public class Command {
 
         //Liste de secteurs
         for(int i = 0; i < gameboard.getSectorList().size(); ++i){
+            System.out.println(gameboard.getSectorList().get(i).size());
             //Liste de liste de secteur
             for(int y = 0; y < gameboard.getSectorList().get(i).size(); ++y){
                 //Liste des carrés
@@ -108,15 +109,23 @@ public class Command {
 
                         if(gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getLevel() == 1){
                             allLevelOneSquare.add(gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z));
-
+                            System.out.println(gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getPosition().toString());
                             int line = z + 1;
-                            position += String.valueOf(line) + gameboard.getSectorList().get(i).get(y).getSectorPosition();
+                            System.out.println("i,y,x,z : "+i+y+x+z);
+                            System.err.print("gameboard.getSectorList().get(i).get(y).getSectorPosition() : ");
+                            System.out.println(gameboard.getSectorList().get(i).get(y).getSectorPosition());
+                            position += gameboard.getSectorList().get(i).get(y).getSectorPosition()+String.valueOf(x+1)+ String.valueOf(line) ;
                             position = String.valueOf(position);
-
+                            System.err.print("position : ");
+                            System.out.println(position);
                             allLevelOneSquarePos.add(position);
-
+                            System.out.println("couleur : "+player.getFaction().getColor().toString());
+                            
+                            
                             position = "";
-
+                            if (ask==position){
+                                gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).addShipInList(player.getFaction().getColor().toString().charAt(0));
+                            }
                         }
 
                             /*
@@ -140,10 +149,11 @@ public class Command {
                     }
                 }
             }
-
-            System.out.println(ask);
-            System.out.println(allLevelOneSquare);
-            System.out.println(allLevelOneSquarePos);
+            Gameboard g = Gameboard.getInstance();
+            g.displayGameboardSkin();
+            // System.out.println(ask);
+            // System.out.println(allLevelOneSquare);
+            // System.out.println(allLevelOneSquarePos);
         }
 
 }
