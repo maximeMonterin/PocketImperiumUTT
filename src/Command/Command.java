@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+
 import board.Square;
 import game_engine.Game;
 import user.Color;
@@ -147,22 +148,29 @@ public class Command {
             player.getFaction().removeToReserve(2);
 
             String master = "";
+            int indexOfSkin = 3;
             
-            if(squareTemp.getSkin().size() == 4){
-                master = squareTemp.getSkin().get(3);
-            }
             if(squareTemp.getSkin().size() == 5){
-                master = squareTemp.getSkin().get(4);
+                indexOfSkin = 4;
             }
+
+            master = squareTemp.getSkin().get(indexOfSkin);
 
             String target = "      ";
             String replacement = "  " + player.getFaction().getColorCode() + ".." + "\u001B[0m" + "  ";
             String proceed = master.replace(target, replacement);
-            squareTemp.getSkin().replace(3, proceed);
+            squareTemp.getSkin().replace(indexOfSkin, proceed);
 
-            Game.gameboard.reset();
+            for (int i = allLevelOneSquarePos.size() - 1; i >= 0; i--) {
+                if (allLevelOneSquarePos.get(i).charAt(0) == ask.charAt(0)) {
+                    allLevelOneSquarePos.remove(i);
+                    allLevelOneSquareList.remove(i);
+                }
+            }
 
-            allLevelOneSquarePos.remove(ask);
+            System.out.println(player.getFaction().getReserve());
+            System.out.println(squareTemp.getShipsIn());
+
             ask = "";
         }
 

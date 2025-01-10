@@ -51,9 +51,13 @@ public class Game {
 			Command.setPlayerShips(players.get(i));
 		}
 
+		gameboard.update();
+
 		for(int i = this.players.size() - 1; i >=0; --i){
 			Command.setPlayerShips(players.get(i));
 		}
+
+		Game.gameboard.update();
 
 		Command.scanner.close();
 		
@@ -180,7 +184,6 @@ public class Game {
 		gameboard = Gameboard.getInstance();
 		gameboard.init(temp);
 		gameboard.gameboardSkinBuilder();
-		gameboard.displayGameboardSkin();
 	}
 	
 	
