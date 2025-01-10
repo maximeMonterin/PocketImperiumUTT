@@ -3,12 +3,10 @@ package user;
 import java.util.ArrayList;
 import java.util.List;
 
-import board.Square;
-
 public class Faction {
 	
 	private int reserve;
-	private List<Square> hexList = new ArrayList<Square>();
+	private List<String> hexFactionList = new ArrayList<String>();
 	private Color color;
 	private char shipColor;
 	private String colorCode;
@@ -49,8 +47,8 @@ public class Faction {
 		this.reserve += newShip;
 	}
 	
-	public void addHexInList(Square hex) {
-		this.hexList.add(hex);
+	public void addHexInList(String hex) {
+		this.hexFactionList.add(hex);
 	}
 	
 	public int countPoint() {
@@ -73,12 +71,12 @@ public class Faction {
 		this.reserve -= numberOfShip;
 	}
 
-	public List<Square> getHexList() {
-		return hexList;
+	public List<String> getHexList() {
+		return hexFactionList;
 	}
 
-	public void setHexList(List<Square> hexList) {
-		this.hexList = hexList;
+	public void setHexList(List<String> hexList) {
+		this.hexFactionList = hexList;
 	}
 
 	public Color getColor() {

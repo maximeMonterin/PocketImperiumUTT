@@ -144,25 +144,9 @@ public class Command {
 
             Square squareTemp = allLevelOneSquareList.get(allLevelOneSquarePos.indexOf(ask));
 
-            for(int i = 0; i < 2; ++i){
-                squareTemp.addShipInList(player.getFaction().getShipColor());
-            }
+            squareTemp.addShipInList(player.getFaction().getShipColor(), 2, player);
 
             player.getFaction().removeToReserve(2);
-
-            String master = "";
-            int indexOfSkin = 3;
-            
-            if(squareTemp.getSkin().size() == 5){
-                indexOfSkin = 4;
-            }
-
-            master = squareTemp.getSkin().get(indexOfSkin);
-
-            String target = "      ";
-            String replacement = "  " + player.getFaction().getColorCode() + ".." + "\u001B[0m" + "  ";
-            String proceed = master.replace(target, replacement);
-            squareTemp.getSkin().replace(indexOfSkin, proceed);
 
             for (int i = allLevelOneSquarePos.size() - 1; i >= 0; i--) {
                 if (allLevelOneSquarePos.get(i).charAt(0) == ask.charAt(0)) {
@@ -173,6 +157,8 @@ public class Command {
 
             System.out.println(player.getFaction().getReserve());
             System.out.println(squareTemp.getShipsIn());
+
+            player.getFaction().getHexList().add(ask);
 
             ask = "";
         }
@@ -194,7 +180,7 @@ public class Command {
                 charUsed.clear();
                 System.out.println(Command.instanceString + " Veuillez entrer un ordre de carte valide : ");
                 ask = scanner.nextLine();
-                
+
                 for(final char number : ask.toCharArray()){
                     if (charUsed.contains(number)){
                         ask = "";

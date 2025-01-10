@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import user.Player;
+
 public class Square {
 
 	private int level;
@@ -29,8 +31,37 @@ public class Square {
 
 
 
-	public void addShipInList(char ship) {
-		this.shipsIn.add(ship);
+	public void addShipInList(char ship, int number, Player player) {
+
+		for(int i = 0; i < number; ++i){
+			this.shipsIn.add(ship);
+		}
+
+		int indexOfSkin = 3;
+		int numberofPipe = 0;
+		String replacement = "";
+
+		if(this.getSkin().size() == 5){
+			indexOfSkin = 4;
+		}
+
+		for(int i = 0; i < this.getSkin().get(indexOfSkin).length(); ++i){
+			if(this.getSkin().get(indexOfSkin).charAt(i) == '|'){
+				++numberofPipe;
+			}
+		}
+
+		if(numberofPipe == 2){
+			replacement = "|  " + player.getFaction().getColorCode() + this.getShipsIn().size() + "\u001B[0m" + "    |";
+		}
+		else if(numberofPipe == 1){
+			replacement = "  " + player.getFaction().getColorCode() + this.getShipsIn().size() + "\u001B[0m" + "    |";
+		}
+ 		else {
+			replacement = "  " + player.getFaction().getColorCode() + this.getShipsIn().size() + "\u001B[0m" + "    ";
+		}
+
+		this.getSkin().put(indexOfSkin, replacement);
 	}
 	
 	
