@@ -22,7 +22,6 @@ public class Gameboard {
 	}
 
 	public void update(){
-		//System.out.println(this.sectorList.get(0).get(0).getHexlist().get(1).get(1));
 		this.gameboardSkin = new HashMap<Integer, String>();
 		this.gameboardLineKey = 1;
 

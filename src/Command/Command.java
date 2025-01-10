@@ -101,7 +101,6 @@ public class Command {
 
         //Liste de secteurs
         for(int i = 0; i < Game.gameboard.getSectorList().size(); ++i){
-            System.out.println(Game.gameboard.getSectorList().get(i).size());
             //Liste de liste de secteur
             for(int y = 0; y < Game.gameboard.getSectorList().get(i).size(); ++y){
                 //Liste des carrés
@@ -154,9 +153,6 @@ public class Command {
                     allLevelOneSquareList.remove(i);
                 }
             }
-
-            System.out.println(player.getFaction().getReserve());
-            System.out.println(squareTemp.getShipsIn());
 
             player.getFaction().getHexList().add(ask);
 
