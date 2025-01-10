@@ -140,6 +140,12 @@ public class Command {
 
             Square squareTemp = allLevelOneSquareList.get(allLevelOneSquarePos.indexOf(ask));
 
+            for(int i = 0; i < 2; ++i){
+                squareTemp.addShipInList(player.getFaction().getShipColor());
+            }
+
+            player.getFaction().removeToReserve(2);
+
             String master = "";
             
             if(squareTemp.getSkin().size() == 4){
