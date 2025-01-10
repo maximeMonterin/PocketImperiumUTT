@@ -19,8 +19,8 @@ public class Gameboard {
 		return INSTANCE;
 	}
 
-	public void reset(List<List<Sector>> newSectorList){
-		this.sectorList = newSectorList;
+	public void reset(){
+		System.out.println(this.sectorList.get(0).get(0).getHexlist().get(1).get(1));
 		this.gameboardSkin = new HashMap<Integer, String>();
 		this.gameboardLineKey = 1;
 
@@ -54,12 +54,9 @@ public class Gameboard {
 		
 	//Méthode qui permet de construire la Map du skin du secteur
 	public void gameboardSkinBuilder() {
-		
 		for(int i = 0; i < this.getSectorList().size(); ++i) {
-
 			gameboardLineStringBuilder(this.getSectorList().get(i));
 		} 
-			
 	}
 
 	//Méthode qui permet de construire chaque ligne du skin du gameboard
@@ -72,10 +69,11 @@ public class Gameboard {
 		while(skinKey <= 20) {
 				
 			for(int i = 0; i < param.size(); ++i) {
-					
+
 				if(param.get(i).getSectorSkin().get(skinKey) == null) {
 					line += "";
 				} else {
+					param.get(i).skinSectorBuilder();
 					line += param.get(i).getSectorSkin().get(skinKey);
 				}
 			}

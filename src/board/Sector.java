@@ -61,7 +61,6 @@ public class Sector {
 		}
 
 		this.skinSectorBuilder();
-		
 	}
 	
 	
@@ -69,15 +68,15 @@ public class Sector {
 	
 	
 	//Méthode qui permet de construire la Map du skin du secteur
-	private void skinSectorBuilder() {
-		
+	public void skinSectorBuilder() {
+		this.sectorSkin.clear();
+		this.sectorLineKey = 1;
+
 		//On parcours notre liste de liste de carré
 		for(int i = 0; i < this.getHexlist().size(); ++i) {
-
 			//Pour chaque liste trouvée, on appel this.sectorLineStringBuilder()
 			sectorLineStringBuilder(this.getHexlist().get(i));
-		} 
-			
+		}
 	}
 	
 	//Méthode qui permet de construire chaque ligne du skin du secteur
