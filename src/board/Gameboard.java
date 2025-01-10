@@ -19,10 +19,19 @@ public class Gameboard {
 		return INSTANCE;
 	}
 
-	public void init(List<Sector> test){
-		Gameboard.tempList = test;
+	public void reset(List<List<Sector>> newSectorList){
+		this.sectorList = newSectorList;
+		this.gameboardSkin = new HashMap<Integer, String>();
+		this.gameboardLineKey = 1;
 
-		int sectorNumber = test.size();
+		this.gameboardSkinBuilder();
+		this.displayGameboardSkin();
+	}
+
+	public void init(List<Sector> param){
+		Gameboard.tempList = param;
+
+		int sectorNumber = param.size();
 		List<Sector> temp = new ArrayList<Sector>();
 	
 		for(int i = 0; i < sectorNumber; ++i){
@@ -70,10 +79,6 @@ public class Gameboard {
 					line += param.get(i).getSectorSkin().get(skinKey);
 				}
 			}
-				
-				/*if(skinKey != sizeSkin + 1) {
-					line += '\r';
-				}*/
 
 			if(!line.isEmpty()) {
 				this.gameboardSkin.put(this.gameboardLineKey, line);
@@ -84,6 +89,7 @@ public class Gameboard {
 			++skinKey;
 				
 		}
+		
 	
 	}
 

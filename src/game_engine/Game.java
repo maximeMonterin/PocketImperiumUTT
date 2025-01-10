@@ -179,8 +179,6 @@ public class Game {
 
 		gameboard = Gameboard.getInstance();
 		gameboard.init(temp);
-
-		gameboard.gameboardSkinBuilder();
 	}
 	
 	

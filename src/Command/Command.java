@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import board.Sector;
 import board.Square;
 import game_engine.Game;
 import user.Color;
@@ -157,15 +158,14 @@ public class Command {
             String proceed = master.replace(target, replacement);
             squareTemp.getSkin().replace(3, proceed);
 
+            List<List<Sector>> test = new ArrayList<>();
+            test = Game.gameboard.getSectorList();
 
-            //int indexOfSquareInGameboard = Game.gameboard.getSectorList().get(Integer.valueOf(squareTempPos.substring(0, 1))).get(Integer.valueOf(squareTempPos.substring(1, 2))).getHexlist().get(Integer.valueOf(squareTempPos.substring(2, 3))).indexOf(Game.gameboard.getSectorList().get(Integer.valueOf(squareTempPos.substring(0, 1))).get(Integer.valueOf(squareTempPos.substring(1, 2))).getHexlist().get(Integer.valueOf(squareTempPos.substring(2, 3))).get(Integer.valueOf(squareTempPos.substring(3, 4))));
-            //Game.gameboard.getSectorList().get(Integer.valueOf(squareTempPos.substring(0, 1))).get(Integer.valueOf(squareTempPos.substring(1, 2))).getHexlist().get(Integer.valueOf(squareTempPos.substring(2, 3))).set(indexOfSquareInGameboard, squareTemp);
 
+            int indexOfSquareInGameboard = test.get(Integer.valueOf(squareTempPos.substring(0, 1))).get(Integer.valueOf(squareTempPos.substring(1, 2))).getHexlist().get(Integer.valueOf(squareTempPos.substring(2, 3))).indexOf(test.get(Integer.valueOf(squareTempPos.substring(0, 1))).get(Integer.valueOf(squareTempPos.substring(1, 2))).getHexlist().get(Integer.valueOf(squareTempPos.substring(2, 3))).get(Integer.valueOf(squareTempPos.substring(3, 4))));
+            test.get(Integer.valueOf(squareTempPos.substring(0, 1))).get(Integer.valueOf(squareTempPos.substring(1, 2))).getHexlist().get(Integer.valueOf(squareTempPos.substring(2, 3))).set(indexOfSquareInGameboard, squareTemp);
 
-            System.out.println(Command.instanceString + " Voici le carre dans le gameboard : " + '\r' );
-            System.out.println(Game.gameboard.getSectorList().get(Integer.valueOf(squareTempPos.substring(0, 1))).get(Integer.valueOf(squareTempPos.substring(1, 2))).getHexlist().get(Integer.valueOf(squareTempPos.substring(2, 3))).get(Integer.valueOf(squareTempPos.substring(3, 4))).toString());
-
-            Game.gameboard.displayGameboardSkin();
+            Game.gameboard.reset(test);
 
             allLevelOneSquarePos.remove(ask);
             ask = "";
