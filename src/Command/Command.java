@@ -18,6 +18,9 @@ public class Command {
     public static String instanceString = "\u001B[34m" + "[PocketImperium]" + "\u001B[0m";
     private static int currentPlayer;
     private static List<String> colors = new ArrayList<>(Arrays.asList("ROUGE", "BLEU", "JAUNE", "VERT"));
+    private static List<String> allLevelOneSquarePos = new ArrayList<>();
+    private static List<Square> allLevelOneSquare = new ArrayList<>();
+    private static String position = "";
         
             /**
              * Permet de centraliser les interactions avec l'utilisateur et la gestion d'erreur dans une seule méthode.
@@ -88,14 +91,7 @@ public class Command {
 
     }
 
-    public static void setPlayerShips(Player player, Gameboard gameboard){
-        System.out.println(Command.instanceString + player.getFaction().getColorCode() + " [" + player.getName() + "]" + "\u001B[0m" + ", veuillez choisir un carre que vous souhaitez controler : ");
-        String ask = scanner.nextLine();
-        String position = "";
-
-        List<String> allLevelOneSquarePos = new ArrayList<>();
-        List<Square> allLevelOneSquare = new ArrayList<>();
-
+    public static void getLevelOneSquare(Gameboard gameboard){
 
         //Liste de secteurs
         for(int i = 0; i < gameboard.getSectorList().size(); ++i){
@@ -109,23 +105,19 @@ public class Command {
 
                         if(gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getLevel() == 1){
                             allLevelOneSquare.add(gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z));
-                            System.out.println(gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getPosition().toString());
+                            //System.out.println(gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getPosition().toString());
                             int line = z + 1;
-                            System.out.println("i,y,x,z : "+i+y+x+z);
-                            System.err.print("gameboard.getSectorList().get(i).get(y).getSectorPosition() : ");
-                            System.out.println(gameboard.getSectorList().get(i).get(y).getSectorPosition());
+                            //System.out.println("i,y,x,z : "+i+y+x+z);
+                            //System.err.print("gameboard.getSectorList().get(i).get(y).getSectorPosition() : ");
+                            //System.out.println(gameboard.getSectorList().get(i).get(y).getSectorPosition());
                             position += gameboard.getSectorList().get(i).get(y).getSectorPosition()+String.valueOf(x+1)+ String.valueOf(line) ;
                             position = String.valueOf(position);
-                            System.err.print("position : ");
-                            System.out.println(position);
+                            //System.err.print("position : ");
+                            //System.out.println(position);
                             allLevelOneSquarePos.add(position);
-                            System.out.println("couleur : "+player.getFaction().getColor().toString());
-                            
-                            
+                            //System.out.println("couleur : "+player.getFaction().getColor().toString());
+
                             position = "";
-                            if (ask==position){
-                                gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).addShipInList(player.getFaction().getColor().toString().charAt(0));
-                            }
                         }
 
                             /*
@@ -149,8 +141,33 @@ public class Command {
                     }
                 }
             }
-            Gameboard g = Gameboard.getInstance();
-            g.displayGameboardSkin();
+    }
+
+    public static void setPlayerShips(Player player, Gameboard gameboard){
+
+            System.out.println(allLevelOneSquarePos);
+
+            System.out.println(Command.instanceString + player.getFaction().getColorCode() + " [" + player.getName() + "]" + "\u001B[0m" + ", veuillez choisir un carre que vous souhaitez controler : ");
+            String ask = scanner.nextLine();
+
+            while(!allLevelOneSquarePos.contains(ask)){
+                System.out.println(Command.instanceString + " Veuillez entrer une autre valeur de carre : ");
+                position = "";
+                ask = scanner.nextLine();                
+            }
+
+            System.out.println(Command.instanceString + " Votre carre est correct !");
+            allLevelOneSquarePos.remove(ask);
+            ask = "";
+                /*gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).addShipInList(player.getFaction().getColor().toString().charAt(0));
+                String master = gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getSkin().get(3);
+                String target = "      ";
+                String replacement = "  " + player.getFaction().getColorCode() + ".." + "\u001B[0m" + "  ";
+                String proceed = master.replace(target, replacement);
+                gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getSkin().replace(3, proceed);
+                gameboard.displayGameboardSkin();*/
+            
+            //gameboard.displayGameboardSkin();
             // System.out.println(ask);
             // System.out.println(allLevelOneSquare);
             // System.out.println(allLevelOneSquarePos);

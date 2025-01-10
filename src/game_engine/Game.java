@@ -45,6 +45,8 @@ public class Game {
 			}
 		}
 
+		Command.getLevelOneSquare(this.getGameboard());
+
 		for(int i = 0; i < this.players.size(); ++i){
 			Command.setPlayerShips(players.get(i), this.getGameboard());
 		}
