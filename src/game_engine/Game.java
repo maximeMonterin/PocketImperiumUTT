@@ -1,12 +1,15 @@
 package game_engine;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
 import Command.Command;
 import board.Gameboard;
 import board.Sector;
+import cards.Expand;
+import cards.Explore;
 import user.Color;
 import user.Faction;
 import user.Player;
@@ -34,16 +37,7 @@ public class Game {
 
 		this.setUpPlayers();
 
-		for(int i = 0; i < this.players.size(); ++i){
-
-			if(players.get(i).isPlayerOne() && i != 0){
-
-				Player tempPlayer = players.get(0);
-				players.set(0, players.get(i));
-				players.set(i, tempPlayer);
-				
-			}
-		}
+		Collections.shuffle(players);
 
 		Command.getLevelOneSquare();
 
@@ -75,12 +69,6 @@ public class Game {
 			Color colorOfPlayer = Command.askColor();
 			Player player = new Player(name, new Faction(colorOfPlayer));
 
-			if(playerOrder == 3){
-				player.setPlayerOne(true);
-			} else {
-				player.setPlayerOne(false);
-			}
-
 			this.getPlayers().add(player);
 
 			++playerOrder;
@@ -98,14 +86,54 @@ public class Game {
 		System.out.println(Command.instanceString + " Setup de la partie termine, enclanchement de la prochaine phase");
 	}
 	
-	public void playRound() {
+	public void playRounds() {
 		this.plan();
+		this.perform();
+
+
+		Player tempPlayer = players.get(0);
+		players.remove(0);
+		players.add(tempPlayer);
 	}
 
 	private void plan(){
 		for(int i = 0; i < players.size(); ++i){
 			Command.orderCards(players.get(i));
 		}
+	}
+
+	private void cardReveal(int indexCard){
+
+		List<Player> expandList = new ArrayList<>();
+		List<Player> exploreList = new ArrayList<>();
+		List<Player> exterminateList = new ArrayList<>();
+
+		for(int i = 0; i < players.size(); ++i){
+			System.out.println(Command.instanceString + players.get(i).getFaction().getColorCode() + " [" + players.get(i).getName() + "]" + "\u001B[0m" + " Votre premiere carte est : " + players.get(i).getCards().get(indexCard).getName());
+
+			if(players.get(i).getCards().get(indexCard) instanceof Expand){expandList.add(players.get(i));}
+			else if(players.get(i).getCards().get(indexCard) instanceof Explore){exploreList.add(players.get(i));}
+			else {exterminateList.add(players.get(i));}
+
+		}
+
+		for(int i = 0; i < expandList.size(); ++i){
+			expandList.get(i).getCards().get(indexCard).execute(expandList.get(i), expandList.size());
+		}
+
+		for(int i = 0; i < exploreList.size(); ++i){
+			exploreList.get(i).getCards().get(indexCard).execute(exploreList.get(i), exploreList.size());
+		}
+
+		for(int i = 0; i < exterminateList.size(); ++i){
+			exterminateList.get(i).getCards().get(indexCard).execute(exterminateList.get(i), exterminateList.size());
+		}
+
+	}
+
+	private void perform(){
+
+		this.cardReveal(0);
 	}
 	
 	public void endGame() {}

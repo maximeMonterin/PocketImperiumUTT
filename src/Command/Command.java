@@ -178,12 +178,30 @@ public class Command {
         }
 
         public static void orderCards(Player player){
+            List<Character> charUsed = new ArrayList<>();
             System.out.println(Command.instanceString + player.getFaction().getColorCode() + " [" + player.getName() + "]" + "\u001B[0m" + ", veuillez choisir l'ordre dans lequel vous souhaitez jouer vos cartes, parmi : [1 EXTERMINATE, 2 EXPLORE, 3 EXPAND]" );
             String ask = scanner.nextLine();
 
+            for(final char number : ask.toCharArray()){
+                if (charUsed.contains(number)){
+                    ask = "";
+                } else {
+                    charUsed.add(number);
+                }
+            }
+
             while (!ask.matches("^[1-3][1-3][1-3]$")) {
+                charUsed.clear();
                 System.out.println(Command.instanceString + " Veuillez entrer un ordre de carte valide : ");
-                ask = scanner.nextLine();          
+                ask = scanner.nextLine();
+                
+                for(final char number : ask.toCharArray()){
+                    if (charUsed.contains(number)){
+                        ask = "";
+                    } else {
+                        charUsed.add(number);
+                    }
+                }
             }
 
             
