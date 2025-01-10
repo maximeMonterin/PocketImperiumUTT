@@ -34,6 +34,10 @@ public class Player {
 	public List<Cards> selectCards(){
 		return this.getCards();
 	}
+
+	public void addCardsToList(Cards card){
+		this.cards.add(card);
+	}
 	
 	
 	

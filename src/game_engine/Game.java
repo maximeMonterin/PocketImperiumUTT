@@ -59,9 +59,6 @@ public class Game {
 
 		Game.gameboard.update();
 
-		Command.scanner.close();
-		
-
 	}
 
 	private void setUpPlayers(){
@@ -101,11 +98,19 @@ public class Game {
 		System.out.println(Command.instanceString + " Setup de la partie termine, enclanchement de la prochaine phase");
 	}
 	
-	public void playRound() {this.cardReveal();}
+	public void playRound() {
+		this.plan();
+	}
+
+	private void plan(){
+		for(int i = 0; i < players.size(); ++i){
+			Command.orderCards(players.get(i));
+		}
+	}
 	
 	public void endGame() {}
 	
-	private void cardReveal() {}
+	//private void cardReveal() {}
 	
 	public void saveIntoJSON() {}
 	

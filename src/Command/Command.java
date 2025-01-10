@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import board.Square;
+import cards.Expand;
+import cards.Explore;
+import cards.Exterminate;
 import game_engine.Game;
 import user.Color;
 import user.Player;
@@ -172,6 +175,32 @@ public class Command {
             System.out.println(squareTemp.getShipsIn());
 
             ask = "";
+        }
+
+        public static void orderCards(Player player){
+            System.out.println(Command.instanceString + player.getFaction().getColorCode() + " [" + player.getName() + "]" + "\u001B[0m" + ", veuillez choisir l'ordre dans lequel vous souhaitez jouer vos cartes, parmi : [1 EXTERMINATE, 2 EXPLORE, 3 EXPAND]" );
+            String ask = scanner.nextLine();
+
+            while (!ask.matches("^[1-3][1-3][1-3]$")) {
+                System.out.println(Command.instanceString + " Veuillez entrer un ordre de carte valide : ");
+                ask = scanner.nextLine();          
+            }
+
+            
+            for(final char number : ask.toCharArray()){
+                if(number == '1'){
+                    player.addCardsToList(new Exterminate());
+                }
+                if(number == '2'){
+                    player.addCardsToList(new Explore());
+                }
+                if(number == '3'){
+                    player.addCardsToList(new Expand());
+                }
+            }
+
+            System.out.println(Command.instanceString + " Choix enregistre !");
+
         }
 
 }

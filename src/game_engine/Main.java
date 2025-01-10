@@ -9,6 +9,7 @@ public class Main {
 		Game game = Game.getInstance();
 		game.initializeGameboard();
 		game.startGame();
+		game.playRound();
 		
 	}
 		
