@@ -51,6 +51,10 @@ public class Game {
 			Command.setPlayerShips(players.get(i), this.getGameboard());
 		}
 
+		for(int i = this.players.size() - 1; i >=0; --i){
+			Command.setPlayerShips(players.get(i), this.getGameboard());
+		}
+
 		Command.scanner.close();
 		
 
@@ -62,7 +66,7 @@ public class Game {
 		int playerOrder = 1;
 
 		/* CODE */
-
+		System.out.println('\n');
 		System.out.println(Command.instanceString + " Bienvenue dans une partie de Pocket Imperium !");
 
 		while(playerOrder < 4){
@@ -86,6 +90,8 @@ public class Game {
 		for(int i = 0; i < players.size(); ++i){
 			playerList += players.get(i).getFaction().getColorCode() + " [" + players.get(i).getName() + "]" + "\u001B[0m";
 		}
+
+		this.getGameboard().displayGameboardSkin();
 
 		System.out.println(Command.instanceString + " Joueurs" + playerList + ", bienvenue a vous !");
 		System.out.println(Command.instanceString + " Setup de la partie termine, enclanchement de la prochaine phase");
@@ -175,7 +181,6 @@ public class Game {
 		gameboard.init(temp);
 
 		gameboard.gameboardSkinBuilder();
-		gameboard.displayGameboardSkin();
 	}
 	
 	

@@ -59,7 +59,7 @@ public class Command {
     public static Color askColor(){
         Color color;
         
-        System.out.println(Command.instanceString + " Joueur " + currentPlayer + ", veuillez choisir la couleur qui représentera votre faction, parmi " + colors + " : ");
+        System.out.println(Command.instanceString + " Joueur " + currentPlayer + ", veuillez choisir la couleur qui representera votre faction, parmi " + colors + " : ");
         String ask = scanner.nextLine();
 
         while(!colors.contains(ask.toUpperCase())){
@@ -105,49 +105,25 @@ public class Command {
 
                         if(gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getLevel() == 1){
                             allLevelOneSquare.add(gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z));
-                            //System.out.println(gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getPosition().toString());
+
                             int line = z + 1;
-                            //System.out.println("i,y,x,z : "+i+y+x+z);
-                            //System.err.print("gameboard.getSectorList().get(i).get(y).getSectorPosition() : ");
-                            //System.out.println(gameboard.getSectorList().get(i).get(y).getSectorPosition());
+
                             position += gameboard.getSectorList().get(i).get(y).getSectorPosition()+String.valueOf(x+1)+ String.valueOf(line) ;
                             position = String.valueOf(position);
-                            //System.err.print("position : ");
-                            //System.out.println(position);
+
                             allLevelOneSquarePos.add(position);
-                            //System.out.println("couleur : "+player.getFaction().getColor().toString());
 
                             position = "";
-                        }
-
-                            /*
-                            System.out.println(position);
-                            System.out.println(gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getLevel());
-
-                            if(position == ask && gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getLevel() == 1){
-                                String master = gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getSkin().get(3);
-                                String target = "      ";
-                                String replacement = "  " + player.getFaction().getColorCode() + ".." + "\u001B[0m" + "  ";
-                                String proceed = master.replace(target, replacement);
-                                gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).getSkin().replace(3, proceed);
-                                gameboard.displayGameboardSkin();
-                                squareUnlock = true;
-                            } else {
-                                System.out.println("veuillez entrer une autre valeur de carre : ");
-                                position = "";
-                                ask = scanner.nextLine();
-                            } */
                         }
                     }
                 }
             }
+        }
     }
 
     public static void setPlayerShips(Player player, Gameboard gameboard){
 
-            System.out.println(allLevelOneSquarePos);
-
-            System.out.println(Command.instanceString + player.getFaction().getColorCode() + " [" + player.getName() + "]" + "\u001B[0m" + ", veuillez choisir un carre que vous souhaitez controler : ");
+            System.out.println(Command.instanceString + player.getFaction().getColorCode() + " [" + player.getName() + "]" + "\u001B[0m" + ", veuillez choisir un carre que vous souhaitez controler parmi : " + allLevelOneSquarePos.toString());
             String ask = scanner.nextLine();
 
             while(!allLevelOneSquarePos.contains(ask)){
@@ -156,7 +132,7 @@ public class Command {
                 ask = scanner.nextLine();                
             }
 
-            System.out.println(Command.instanceString + " Votre carre est correct !");
+            System.out.println(Command.instanceString + " Votre flotte prepare son installation...");
             allLevelOneSquarePos.remove(ask);
             ask = "";
                 /*gameboard.getSectorList().get(i).get(y).getHexlist().get(x).get(z).addShipInList(player.getFaction().getColor().toString().charAt(0));
