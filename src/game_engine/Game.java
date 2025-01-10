@@ -14,7 +14,7 @@ import user.Player;
 public class Game {
 	
 	private List<Player> players = new ArrayList<Player>();
-	private Gameboard gameboard;
+	public static Gameboard gameboard;
 	private int actualRound;
 	private int actualDirection;
 	
@@ -45,14 +45,14 @@ public class Game {
 			}
 		}
 
-		Command.getLevelOneSquare(this.getGameboard());
+		Command.getLevelOneSquare();
 
 		for(int i = 0; i < this.players.size(); ++i){
-			Command.setPlayerShips(players.get(i), this.getGameboard());
+			Command.setPlayerShips(players.get(i));
 		}
 
 		for(int i = this.players.size() - 1; i >=0; --i){
-			Command.setPlayerShips(players.get(i), this.getGameboard());
+			Command.setPlayerShips(players.get(i));
 		}
 
 		Command.scanner.close();
@@ -177,7 +177,7 @@ public class Game {
 		temp.add(sectorNine);
 
 
-		this.gameboard = Gameboard.getInstance();
+		gameboard = Gameboard.getInstance();
 		gameboard.init(temp);
 
 		gameboard.gameboardSkinBuilder();
@@ -198,8 +198,8 @@ public class Game {
 		return gameboard;
 	}
 
-	public void setGameboard(Gameboard gameboard) {
-		this.gameboard = gameboard;
+	public void setGameboard(Gameboard param) {
+		gameboard = param;
 	}
 
 	public int getActualRound() {
