@@ -2,10 +2,8 @@ package cards;
 
 import user.Player;
 
-import java.util.List;
-
 import Command.Command;
-import board.Sector;
+import board.Gameboard;
 import board.Square;
 import game_engine.Game;
 
@@ -23,19 +21,13 @@ public class Expand implements Cards {
 			ask = Command.scanner.nextLine().replaceAll("\\s+", "");
 		}
 
-		final int indexSector = (int)(ask.charAt(0) - 'a');
-		final List<Sector> sectors = Game.gameboard.getSectorList().get(indexSector / 3);
-		final Sector sector = sectors.get(indexSector % 3);
-
-		final int row = Integer.parseInt(String.valueOf(ask.charAt(1))) - 1;
-		final int column = Integer.parseInt(String.valueOf(ask.charAt(2))) - 1;
-		final Square square = sector.getHexlist().get(row).get(column);
+		Square square = Gameboard.getHexFromCoordinates(ask);
 
 		int shipsToAddInSquare = 4 - instanceOfCard;
 
 		player.getFaction().removeToReserve(shipsToAddInSquare);
 		
-		square.addShipInList(player.getFaction().getShipColor(), shipsToAddInSquare, player);
+		square.addShipInList(shipsToAddInSquare, player);
 
 		Game.gameboard.update();
 		

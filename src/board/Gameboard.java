@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import game_engine.Game;
+
 public class Gameboard {
 
 	private List<List<Sector>> sectorList = new ArrayList<List<Sector>>();
@@ -51,6 +53,22 @@ public class Gameboard {
 			
 			
 	/* -_-_-_-_-_-_-_- METHODS -_-_-_-_-_-_-_- */
+
+	public static Square getHexFromCoordinates(String str){
+
+		if(!str.matches("^[a-z][1-3][1-3]$")){
+			return null;
+		}
+
+		final int indexSector = (int)(str.charAt(0) - 'a');
+		final List<Sector> sectors = Game.gameboard.getSectorList().get(indexSector / 3);
+		final Sector sector = sectors.get(indexSector % 3);
+	
+		final int row = Integer.parseInt(String.valueOf(str.charAt(1))) - 1;
+		final int column = Integer.parseInt(String.valueOf(str.charAt(2))) - 1;
+
+		return(sector.getHexlist().get(row).get(column));
+	}
 		
 	//Méthode qui permet de construire la Map du skin du secteur
 	public void gameboardSkinBuilder() {

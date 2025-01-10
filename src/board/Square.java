@@ -29,13 +29,31 @@ public class Square {
 
 
 
+	public void removeShipsInList(int number, Player player){
+		for(int i = 0; i < number; ++i){
+			this.getShipsIn().remove(this.getShipsIn().size() - 1);
+		}
+
+		this.updateSkin(player);
+	}
 
 
-	public void addShipInList(char ship, int number, Player player) {
+	public void addShipInList(int number, Player player) {
 
 		for(int i = 0; i < number; ++i){
-			this.shipsIn.add(ship);
+			this.shipsIn.add(player.getFaction().getShipColor());
 		}
+
+		this.updateSkin(player);
+
+	}
+
+	private void updateSkin(Player player){
+		String dataToPut = String.valueOf(this.getShipsIn().size());
+		if (this.getShipsIn().size() == 0) {
+			dataToPut = " ";
+		}
+
 
 		int indexOfSkin = 3;
 		int numberofPipe = 0;
@@ -52,13 +70,13 @@ public class Square {
 		}
 
 		if(numberofPipe == 2){
-			replacement = "|  " + player.getFaction().getColorCode() + this.getShipsIn().size() + "\u001B[0m" + "    |";
+			replacement = "|  " + player.getFaction().getColorCode() + dataToPut + "\u001B[0m" + "    |";
 		}
 		else if(numberofPipe == 1){
-			replacement = "  " + player.getFaction().getColorCode() + this.getShipsIn().size() + "\u001B[0m" + "    |";
+			replacement = "  " + player.getFaction().getColorCode() + dataToPut + "\u001B[0m" + "    |";
 		}
  		else {
-			replacement = "  " + player.getFaction().getColorCode() + this.getShipsIn().size() + "\u001B[0m" + "    ";
+			replacement = "  " + player.getFaction().getColorCode() + dataToPut + "\u001B[0m" + "    ";
 		}
 
 		this.getSkin().put(indexOfSkin, replacement);
