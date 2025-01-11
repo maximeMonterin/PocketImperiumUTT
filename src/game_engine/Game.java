@@ -91,6 +91,7 @@ public class Game {
 	
 	public void playRounds(int i) {
 		System.out.println(Command.instanceString + " Round numero " + i + " !");
+		this.plan();
 		this.perform();
 
 
@@ -99,7 +100,7 @@ public class Game {
 		players.add(tempPlayer);
 	}
 
-	public void plan(){
+	private void plan(){
 		for(int i = 0; i < players.size(); ++i){
 			Command.orderCards(players.get(i));
 		}
@@ -158,6 +159,7 @@ public class Game {
 
 			while(!listOfSectors.contains(sector)){
 				System.out.println(Command.instanceString + " Veuillez selectionner un secteur valide ");
+				sector = Command.askPlayerSectorPoints(players.get(i), listOfSectors).charAt(0);
 			}
 
 			listOfSectors.remove(sector);
@@ -174,8 +176,7 @@ public class Game {
 
 		listOfSectors = new ArrayList<>(Arrays.asList('a', 'b', 'c', 'd', 'f', 'g', 'h', 'i'));
 	}
-	
-	//private void cardReveal() {}
+
 	
 	public void saveIntoJSON() {}
 	
