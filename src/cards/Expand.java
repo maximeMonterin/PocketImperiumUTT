@@ -5,8 +5,6 @@ import user.Player;
 import Command.Command;
 import board.Gameboard;
 import board.Square;
-import game_engine.Game;
-
 public class Expand implements Cards {
 
 	private String cardName = "EXPAND" ;
@@ -28,8 +26,6 @@ public class Expand implements Cards {
 		player.getFaction().removeToReserve(shipsToAddInSquare);
 		
 		square.addShipInList(shipsToAddInSquare, player);
-
-		Game.gameboard.update();
 		
 	}
 

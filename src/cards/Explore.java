@@ -5,7 +5,6 @@ import user.Player;
 import Command.Command;
 import board.Gameboard;
 import board.Square;
-import game_engine.Game;
 
 public class Explore implements Cards {
 
@@ -44,10 +43,8 @@ public class Explore implements Cards {
 			askShip = Command.scanner.nextLine();
 		}
 
-		squareOne.removeShipsInList(Integer.parseInt(askShip), player);
+		squareOne.removeShipsInList(Integer.parseInt(askShip));
 		squareTwo.addShipInList(Integer.parseInt(askShip), player);
-
-		Game.gameboard.update();
 
 	}
 

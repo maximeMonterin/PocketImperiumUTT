@@ -9,6 +9,7 @@ import user.Player;
 public class Square {
 
 	private int level;
+	private Player player;
 	private List<Character> shipsIn = new ArrayList<Character>();
 	private HashMap<Integer, String> skin;
 	private HashMap<Integer, Character> position = new HashMap<>();
@@ -27,31 +28,47 @@ public class Square {
 		return "Square [level=" + level + ", shipsIn=" + shipsIn + ", skin=" + skin + "]";
 	}
 
+	public Player getPlayer(){
+		return this.player;
+	}
 
 
-	public void removeShipsInList(int number, Player player){
+
+	public void removeShipsInList(int number){
 		for(int i = 0; i < number; ++i){
 			this.getShipsIn().remove(this.getShipsIn().size() - 1);
 		}
 
-		this.updateSkin(player);
+		if(this.getShipsIn().size() == 0){
+			player = null;
+		}
+
+		this.updateSkin();
 	}
 
 
 	public void addShipInList(int number, Player player) {
 
+		this.player = player;
+
 		for(int i = 0; i < number; ++i){
-			this.shipsIn.add(player.getFaction().getShipColor());
+			this.shipsIn.add(this.player.getFaction().getShipColor());
 		}
 
-		this.updateSkin(player);
+		this.updateSkin();
 
 	}
 
-	private void updateSkin(Player player){
+	private void updateSkin(){
 		String dataToPut = String.valueOf(this.getShipsIn().size());
 		if (this.getShipsIn().size() == 0) {
 			dataToPut = " ";
+		}
+
+		String color = "";
+
+		if(player != null){
+			color = this.player.getFaction().getColorCode();
 		}
 
 
@@ -70,13 +87,13 @@ public class Square {
 		}
 
 		if(numberofPipe == 2){
-			replacement = "|  " + player.getFaction().getColorCode() + dataToPut + "\u001B[0m" + "    |";
+			replacement = "|  " + color + dataToPut + "\u001B[0m" + "    |";
 		}
 		else if(numberofPipe == 1){
-			replacement = "  " + player.getFaction().getColorCode() + dataToPut + "\u001B[0m" + "    |";
+			replacement = "  " + color + dataToPut + "\u001B[0m" + "    |";
 		}
  		else {
-			replacement = "  " + player.getFaction().getColorCode() + dataToPut + "\u001B[0m" + "    ";
+			replacement = "  " + color + dataToPut + "\u001B[0m" + "    ";
 		}
 
 		this.getSkin().put(indexOfSkin, replacement);

@@ -119,14 +119,17 @@ public class Game {
 
 		for(int i = 0; i < expandList.size(); ++i){
 			expandList.get(i).getCards().get(indexCard).execute(expandList.get(i), expandList.size());
+			gameboard.update();
 		}
 
 		for(int i = 0; i < exploreList.size(); ++i){
 			exploreList.get(i).getCards().get(indexCard).execute(exploreList.get(i), exploreList.size());
+			gameboard.update();
 		}
 
 		for(int i = 0; i < exterminateList.size(); ++i){
 			exterminateList.get(i).getCards().get(indexCard).execute(exterminateList.get(i), exterminateList.size());
+			gameboard.update();
 		}
 
 	}
