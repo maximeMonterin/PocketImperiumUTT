@@ -16,10 +16,10 @@ public class Main {
 		game.startGame();
 
 		for(int i = 1; i <= 8; ++i){
+			game.playRounds(i);
 			if(game.endGame()){
 				break;
 			}
-			game.playRounds(i);
 			game.countPoints();
 		}
 
