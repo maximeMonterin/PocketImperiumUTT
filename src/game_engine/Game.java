@@ -135,8 +135,9 @@ public class Game {
 	}
 
 	private void perform(){
-
-		this.cardReveal(0);
+		for(int i = 0; i < this.players.get(0).getCards().size(); ++i){
+			this.cardReveal(i);
+		}
 	}
 	
 	public void endGame() {}

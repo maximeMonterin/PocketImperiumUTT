@@ -34,10 +34,12 @@ public class Square {
 
 
 
-	public void removeShipsInList(int number){
+	public void removeShipsInList(int number, String co){
 		for(int i = 0; i < number; ++i){
 			this.getShipsIn().remove(this.getShipsIn().size() - 1);
 		}
+
+		this.player.getFaction().getHexList().remove(co);
 
 		if(this.getShipsIn().size() == 0){
 			player = null;

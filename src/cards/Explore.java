@@ -43,7 +43,7 @@ public class Explore implements Cards {
 			askShip = Command.scanner.nextLine();
 		}
 
-		squareOne.removeShipsInList(Integer.parseInt(askShip));
+		squareOne.removeShipsInList(Integer.parseInt(askShip), ask);
 		squareTwo.addShipInList(Integer.parseInt(askShip), player);
 
 	}

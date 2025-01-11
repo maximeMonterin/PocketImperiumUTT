@@ -37,8 +37,8 @@ public class Exterminate implements Cards {
 
 		final Player playerAttacked = squareTwo.getPlayer();
 
-		squareOne.removeShipsInList(nbShipsToRemove);
-		squareTwo.removeShipsInList(nbShipsToRemove);
+		squareOne.removeShipsInList(nbShipsToRemove, ask);
+		squareTwo.removeShipsInList(nbShipsToRemove, extAsk);
 
 		if(squareOne.getShipsIn().size() == 0 && squareTwo.getShipsIn().size() == 0){
 			System.out.printf("%s\u001B[0m Egalite entre les joueurs %s[%s]\u001B[0m et %s[%s]\u001B[0m !%n", Command.instanceString, player.getFaction().getColorCode(), player.getName(), playerAttacked.getFaction().getColorCode(), playerAttacked.getName());
