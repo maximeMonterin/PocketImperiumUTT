@@ -51,9 +51,9 @@ public class Faction {
 		this.hexFactionList.add(hex);
 	}
 	
-	public int countPoint() {
-		int points = 0;
-		return points;
+
+	public void addPoints(int value){
+		this.score += value;
 	}
 	
 	

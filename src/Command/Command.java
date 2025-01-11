@@ -52,6 +52,13 @@ public class Command {
         }
         return ans;
     }
+
+    public static String askPlayerSectorPoints(Player player, List<Character> charList){
+        System.out.println(Command.instanceString + player.getFaction().getColorCode() + " [" + player.getName() + "]" + "\u001B[0m" + " Selectionnez un secteur pour compter vos points, parmis : " + charList.toString());
+        String ask = scanner.nextLine();
+
+        return ask;
+    }
         
     public static String askPlayerName(int player){
                 

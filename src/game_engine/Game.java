@@ -1,12 +1,14 @@
 package game_engine;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 
 import Command.Command;
 import board.Gameboard;
+import board.Square;
 import board.Sector;
 import cards.Expand;
 import cards.Explore;
@@ -20,6 +22,7 @@ public class Game {
 	public static Gameboard gameboard;
 	private int actualRound;
 	private int actualDirection;
+	private List<Character> listOfSectors = new ArrayList<>(Arrays.asList('a', 'b', 'c', 'd', 'f', 'g', 'h', 'i'));
 	
 	private static final Game INSTANCE = new Game();
 	
@@ -147,6 +150,29 @@ public class Game {
 			}
 		}
 		return false;
+	}
+
+	public void countPoints(){
+		for(int i = 0; i < this.getPlayers().size(); ++i){
+			Character sector = Command.askPlayerSectorPoints(players.get(i), listOfSectors).charAt(0);
+
+			while(!listOfSectors.contains(sector)){
+				System.out.println(Command.instanceString + " Veuillez selectionner un secteur valide ");
+			}
+
+			listOfSectors.remove(sector);
+
+			for(int j = 0; j < this.getPlayers().get(i).getFaction().getHexList().size(); ++j){
+				if(this.getPlayers().get(i).getFaction().getHexList().get(j).indexOf(sector) != -1){
+					Square square = Gameboard.getHexFromCoordinates(this.getPlayers().get(i).getFaction().getHexList().get(j));
+					this.getPlayers().get(i).getFaction().addPoints(square.getLevel());
+				}
+			}
+
+			System.out.println(Command.instanceString + players.get(i).getFaction().getColorCode() + " [" + players.get(i).getName() + "]" + "\u001B[0m" + " Votre score est de : " + players.get(i).getFaction().getScore());
+		}
+
+		listOfSectors = new ArrayList<>(Arrays.asList('a', 'b', 'c', 'd', 'f', 'g', 'h', 'i'));
 	}
 	
 	//private void cardReveal() {}

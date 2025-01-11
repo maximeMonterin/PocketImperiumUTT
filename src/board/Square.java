@@ -39,9 +39,8 @@ public class Square {
 			this.getShipsIn().remove(this.getShipsIn().size() - 1);
 		}
 
-		this.player.getFaction().getHexList().remove(co);
-
 		if(this.getShipsIn().size() == 0){
+			this.player.getFaction().getHexList().remove(co);
 			player = null;
 		}
 

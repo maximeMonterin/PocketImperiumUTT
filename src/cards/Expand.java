@@ -11,6 +11,12 @@ public class Expand implements Cards {
 
 	@Override
 	public void execute(Player player, int instanceOfCard) {
+		
+		if(player.getFaction().getHexList().isEmpty()){
+			System.out.println(Command.instanceString + player.getFaction().getColorCode() + " [" + player.getName() + "]" + "\u001B[0m" + " Vous n'avez plus aucun vaisseau");
+			return;
+		}
+
 		System.out.println(Command.instanceString + player.getFaction().getColorCode() + " [" + player.getName() + "]" + "\u001B[0m" + " Entrez les coordonnees du carre souhaite parmis : " + player.getFaction().getHexList().toString());
 		String ask = Command.scanner.nextLine().replaceAll("\\s+", "");
 
