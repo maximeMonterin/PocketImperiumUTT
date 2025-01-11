@@ -86,8 +86,8 @@ public class Game {
 		System.out.println(Command.instanceString + " Setup de la partie termine, enclanchement de la prochaine phase");
 	}
 	
-	public void playRounds() {
-		this.plan();
+	public void playRounds(int i) {
+		System.out.println(Command.instanceString + " Round numero " + i + " !");
 		this.perform();
 
 
@@ -96,7 +96,7 @@ public class Game {
 		players.add(tempPlayer);
 	}
 
-	private void plan(){
+	public void plan(){
 		for(int i = 0; i < players.size(); ++i){
 			Command.orderCards(players.get(i));
 		}
@@ -140,7 +140,14 @@ public class Game {
 		}
 	}
 	
-	public void endGame() {}
+	public boolean endGame() {
+		for(int i = 0; i < this.getPlayers().size(); ++i){
+			if(this.getPlayers().get(i).getFaction().getHexList().isEmpty()){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	//private void cardReveal() {}
 	
